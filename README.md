@@ -4,7 +4,7 @@
 [![](https://img.shields.io/badge/Facebook-HackintoshLifeIT-informational?style=flat&logo=facebook&logoColor=white&color=3a4dc9)](https://www.facebook.com/hackintoshlife/)
 [![](https://img.shields.io/badge/Instagram-HackintoshLifeIT-informational?style=flat&logo=instagram&logoColor=white&color=8a178a)](https://www.instagram.com/hackintoshlife.it_official/)
 
-# Lenovo ThinkPad X280 20KE Hackintosh 
+# Lenovo ThinkPad X1 Tablet 20KE Hackintosh 
 
 ![Lenovo](./Screenshot/1.jpg)
 ![Lenovo](./Screenshot/2.jpg)
@@ -14,16 +14,16 @@
 - CPU: Intel Core i5-8250u (KabyLake -r) @ 1.60GHz
 - Memory: 1x 8GB DDR4 2666Mhz
 - Harddrive: 1x 256 PCIe NVMe
-- Display: 12" non-touch 1920x1080 IPS, anti-glare 
+- Display: 13" touch 3000x2000 
 - GPU: Intel UHD 620
 - Camera: 1x IR Camera & RGB 720p HD Camera & Mic with Thinkpad Privacy Shutter
 - WLAN: Intel Wi-Fi 8265\8270 (Soldered on)
 - Battery: Integrate Li-Polymer 50Wh internal battery - Up to 16.5 hours*
-- Touchpad: Synaptics 
+- Touchpad: USB 
 - Audio: Realtek HDA ALC257 (aka ALC3287)
 - 2 x USB 3.2 Gen 1** (one Always On)
-- 1 x USB 3.2 Gen 1 Type-C (Power Delivery, DisplayPort, Data transfer)
-- 1 x USB 3.2 Gen 2 Type-C / Intel Thunderbolt 3 (Power Delivery, DisplayPort, Data transfer)
+- 2 x USB 3.2 Gen 1 Type-C (Power Delivery, DisplayPort, Data transfer)
+- 2 x USB 3.2 Gen 2 Type-C / Intel Thunderbolt 3 (Power Delivery, DisplayPort, Data transfer)
 - MicroSD card reader (USB)
 - Headphone / mic combo
 - Micro-SIM slot
@@ -31,7 +31,7 @@
 - RJ45 Gigabit Ethernet I219-LM
  
 
-## BIOS Settings:V 1.49
+## BIOS Settings:V 1.46
 
 The bios must be properly configured prior to installing macOS.
 In Security menu, set the following settings:
