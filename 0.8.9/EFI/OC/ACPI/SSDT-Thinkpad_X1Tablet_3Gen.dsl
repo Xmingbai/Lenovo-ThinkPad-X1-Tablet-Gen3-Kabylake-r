@@ -5,20 +5,20 @@
  * 
  * Disassembling to symbolic ASL+ operators
  *
- * Disassembly of iASLHZ1gVt.aml, Thu Feb  2 12:29:46 2023
+ * Disassembly of iASLCQl13t.aml, Sat Feb  4 21:50:47 2023
  *
  * Original Table Header:
  *     Signature        "SSDT"
- *     Length           0x000011DB (4571)
+ *     Length           0x00001213 (4627)
  *     Revision         0x02
- *     Checksum         0xA8
+ *     Checksum         0xC4
  *     OEM ID           "Hack"
- *     OEM Table ID     "X280"
+ *     OEM Table ID     "X1Tablet"
  *     OEM Revision     0x00000000 (0)
  *     Compiler ID      "INTL"
  *     Compiler Version 0x20200925 (538970405)
  */
-DefinitionBlock ("", "SSDT", 2, "Hack", "X280", 0x00000000)
+DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
 {
     External (_SB_.PCI0, DeviceObj)
     External (_SB_.PCI0.GFX0, DeviceObj)
@@ -31,7 +31,9 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X280", 0x00000000)
     External (_SB_.PCI0.RP09, DeviceObj)
     External (_SB_.PCI0.RP09.PXSX, DeviceObj)
     External (_SB_.SLPB._STA, IntObj)
+    External (_SB_.UBTC, DeviceObj)
     External (_SI_._SST, MethodObj)    // 1 Arguments
+    External (DPTF, IntObj)
     External (HPTE, FieldUnitObj)
     External (LNUX, IntObj)
     External (WNTF, IntObj)
@@ -45,6 +47,7 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X280", 0x00000000)
             HPTE = Zero
             LNUX = One
             WNTF = One
+            DPTF = One
         }
 
         Scope (_SB)
@@ -1041,6 +1044,14 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X280", 0x00000000)
                             Return (Zero)
                         }
                     }
+                }
+            }
+
+            Scope (UBTC)
+            {
+                If (_OSI ("Darwin"))
+                {
+                    Name (OSYS, 0x07DF)
                 }
             }
 
