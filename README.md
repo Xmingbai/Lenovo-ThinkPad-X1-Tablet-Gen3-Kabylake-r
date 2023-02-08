@@ -11,23 +11,20 @@
  
 ## Specification:
 
-- CPU: Intel Core i5-8250u (KabyLake -r) @ 1.60GHz
-- Memory: 2x 4GB DDR4 1867Mhz
-- Harddrive: 1x 256 PCIe NVMe
-- Display: 13" touch 3000x2000 
+- CPU: 1.6GHz Intel Core i5-8250U (Kaby Lake-R)
+- Memory: 2x4GB 1,867MHz LPDDR3
+- Harddrive: 256GB PCIe-NVMe M.2 SSD
+- Display: 13-inch IPS-Touch (3,000×2000) 
 - GPU: Intel UHD 620
-- Camera: 1x IR Camera & RGB 720p HD Camera & Mic with Thinkpad Privacy Shutter
-- WLAN: Intel Wi-Fi 8265\8270 (Soldered on)
-- Battery: Integrate Li-Polymer 50Wh internal battery - Up to 16.5 hours*
+- Camera: Front: 2MP, rear: 8MP
+- WLAN: Intel dual-band 8265 Wireless 802.11ac (2 x 2) & Bluetooth 4.1
+- Battery: Integrate Li-Polymer 42Wh internal battery
 - Toucscreen: USB 
 - Audio: Realtek HDA ALC295
-- 2 x USB 3.2 Gen 1** (one Always On)
-- 2 x USB 3.2 Gen 1 Type-C (Power Delivery, DisplayPort, Data transfer)
-- 2 x USB 3.2 Gen 2 Type-C / Intel Thunderbolt 3 (Power Delivery, DisplayPort, Data transfer)
-- MicroSD card reader (USB)
+- 2 x USB-C/Thunderbolt 3 Alpine Ridge (power delivery, DisplayPort, data transfer)
+- NanoSIM card/microSD combo slot
 - Headphone / mic combo
 - Micro-SIM slot
-- HDMI 1.4b
  
 
 ## BIOS Settings:V 1.46
@@ -58,9 +55,7 @@ In Thunderbolt menu, set the following options:
 
 In Display menu, set the following options:
     
--  `Boot Display Device` : **Thinkpad LCD**
--  `Shared Display Priority` : **USB Type-C**
--  `Total Garphics Memory` : **512MB**
+-  `Boot Display Device` : **LCD**
 -  `Boot Time Extension` : **Disabled**	   
    
 ## Working:
@@ -68,7 +63,6 @@ In Display menu, set the following options:
  - Keyboard (including all Fn keys)
  - Trackpad with gestures / Trackstick
  - Battery indicator
- - Display Internal (No work)
  - Audio (Internal and headphone jack)
  - Microphone
  - Ethernet
@@ -81,7 +75,9 @@ In Display menu, set the following options:
  - HDMI video and audio 
  - Thunderbolt JHL6240 Alpine Ridge Work whit HotPlug 
  
-## Not Tested:
+## Not Work:
+
+ - Display Internal No work Bios blocked, (impossible to adapt DVMT to 128 to be able to display 3k or higher signals)
 
 ## USB Map:
 
@@ -114,11 +110,6 @@ SSDT TB3 : bundled with _DSM with real Mac device properties
                             Name (_STA, Zero)  // _STA: Status
                         }
 
-                        Scope (HRUS)
-                        {
-                            Name (_STA, Zero)  // _STA: Status
-                        }
-
                         Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
                         {
                             Return (Zero)
@@ -143,7 +134,7 @@ SSDT TB3 : bundled with _DSM with real Mac device properties
 
                             Method (_BBN, 0, NotSerialized)  // _BBN: BIOS Bus Number
                             {
-                                Return (SECB) /* \_SB_.PCI0.RP01.UPSB.SECB */
+                                Return (SECB) /* \_SB_.PCI0.RP09.UPSB.SECB */
                             }
 
                             Method (_STA, 0, NotSerialized)  // _STA: Status
@@ -215,7 +206,7 @@ SSDT TB3 : bundled with _DSM with real Mac device properties
 
                                 Method (_BBN, 0, NotSerialized)  // _BBN: BIOS Bus Number
                                 {
-                                    Return (SECB) /* \_SB_.PCI0.RP01.UPSB.DSB0.SECB */
+                                    Return (SECB) /* \_SB_.PCI0.RP09.UPSB.DSB0.SECB */
                                 }
 
                                 Method (_STA, 0, NotSerialized)  // _STA: Status
@@ -306,10 +297,10 @@ SSDT TB3 : bundled with _DSM with real Mac device properties
                                                 }, 
 
                                                 "ThunderboltDROM", 
-                                                Buffer (0x65)
+                                                Buffer (0x6A)
                                                 {
                                                     /* 0000 */  0x63, 0x00, 0x06, 0xBB, 0xAD, 0xA2, 0x93, 0x78,  // c......x
-                                                    /* 0008 */  0x2D, 0xF4, 0x15, 0x15, 0x66, 0x01, 0x58, 0x00,  // -...f.X.
+                                                    /* 0008 */  0x2D, 0xEB, 0x97, 0xAB, 0x14, 0x01, 0x5D, 0x00,  // -.....].
                                                     /* 0010 */  0x01, 0x00, 0x10, 0x00, 0x01, 0x00, 0x08, 0x81,  // ........
                                                     /* 0018 */  0x80, 0x02, 0x80, 0x00, 0x00, 0x00, 0x08, 0x82,  // ........
                                                     /* 0020 */  0x90, 0x01, 0x80, 0x00, 0x00, 0x00, 0x08, 0x83,  // ........
@@ -317,10 +308,11 @@ SSDT TB3 : bundled with _DSM with real Mac device properties
                                                     /* 0030 */  0x90, 0x03, 0x80, 0x01, 0x00, 0x00, 0x05, 0x85,  // ........
                                                     /* 0038 */  0x09, 0x01, 0x00, 0x05, 0x86, 0x09, 0x01, 0x00,  // ........
                                                     /* 0040 */  0x02, 0x87, 0x03, 0x88, 0x20, 0x03, 0x89, 0x80,  // .... ...
-                                                    /* 0048 */  0x02, 0xCA, 0x02, 0xCB, 0x12, 0x01, 0x4C, 0x65,  // ......Le
-                                                    /* 0050 */  0x6E, 0x6F, 0x76, 0x6F, 0x20, 0x54, 0x68, 0x69,  // novo Thi
-                                                    /* 0058 */  0x6E, 0x6B, 0x70, 0x61, 0x64, 0x00, 0x07, 0x02,  // nkpad...
-                                                    /* 0060 */  0x58, 0x32, 0x38, 0x30, 0x00                     // X280.
+                                                    /* 0048 */  0x02, 0xCA, 0x02, 0xCB, 0x08, 0x01, 0x61, 0x70,  // ......ap
+                                                    /* 0050 */  0x70, 0x6C, 0x65, 0x00, 0x16, 0x02, 0x4C, 0x65,  // ple...Le
+                                                    /* 0058 */  0x6E, 0x6F, 0x76, 0x6F, 0x20, 0x54, 0x68, 0x69,  // novo Thi
+                                                    /* 0060 */  0x6E, 0x6B, 0x70, 0x61, 0x64, 0x20, 0x54, 0x31,  // nkpad T1
+                                                    /* 0068 */  0x34, 0x00                                       // 4.
                                                 }, 
 
                                                 "ThunderboltConfig", 
@@ -445,7 +437,7 @@ SSDT TB3 : bundled with _DSM with real Mac device properties
 
                                 Method (_BBN, 0, NotSerialized)  // _BBN: BIOS Bus Number
                                 {
-                                    Return (SECB) /* \_SB_.PCI0.RP01.UPSB.DSB1.SECB */
+                                    Return (SECB) /* \_SB_.PCI0.RP09.UPSB.DSB1.SECB */
                                 }
 
                                 Method (_STA, 0, NotSerialized)  // _STA: Status
@@ -519,7 +511,7 @@ SSDT TB3 : bundled with _DSM with real Mac device properties
 
                                 Method (_BBN, 0, NotSerialized)  // _BBN: BIOS Bus Number
                                 {
-                                    Return (SECB) /* \_SB_.PCI0.RP01.UPSB.DSB2.SECB */
+                                    Return (SECB) /* \_SB_.PCI0.RP09.UPSB.DSB2.SECB */
                                 }
 
                                 Method (_STA, 0, NotSerialized)  // _STA: Status
@@ -626,57 +618,13 @@ SSDT TB3 : bundled with _DSM with real Mac device properties
                                     Device (RHUB)
                                     {
                                         Name (_ADR, Zero)  // _ADR: Address
-                                        Device (HSP1)
-                                        {
-                                            Name (_ADR, One)  // _ADR: Address
-                                            Name (_UPC, Package (0x04)  // _UPC: USB Port Capabilities
-                                            {
-                                                0xFF, 
-                                                0x09, 
-                                                Zero, 
-                                                Zero
-                                            })
-                                            Name (_PLD, Package (0x01)  // _PLD: Physical Location of Device
-                                            {
-                                                ToPLD (
-                                                    PLD_Revision           = 0x1,
-                                                    PLD_IgnoreColor        = 0x1,
-                                                    PLD_Red                = 0x0,
-                                                    PLD_Green              = 0x0,
-                                                    PLD_Blue               = 0x0,
-                                                    PLD_Width              = 0x0,
-                                                    PLD_Height             = 0x0,
-                                                    PLD_UserVisible        = 0x1,
-                                                    PLD_Dock               = 0x0,
-                                                    PLD_Lid                = 0x0,
-                                                    PLD_Panel              = "UNKNOWN",
-                                                    PLD_VerticalPosition   = "UPPER",
-                                                    PLD_HorizontalPosition = "LEFT",
-                                                    PLD_Shape              = "UNKNOWN",
-                                                    PLD_GroupOrientation   = 0x0,
-                                                    PLD_GroupToken         = 0x0,
-                                                    PLD_GroupPosition      = 0x0,
-                                                    PLD_Bay                = 0x0,
-                                                    PLD_Ejectable          = 0x0,
-                                                    PLD_EjectRequired      = 0x0,
-                                                    PLD_CabinetNumber      = 0x0,
-                                                    PLD_CardCageNumber     = 0x0,
-                                                    PLD_Reference          = 0x0,
-                                                    PLD_Rotation           = 0x0,
-                                                    PLD_Order              = 0x0,
-                                                    PLD_VerticalOffset     = 0x0,
-                                                    PLD_HorizontalOffset   = 0x0)
-
-                                            })
-                                        }
-
                                         Device (SSP1)
                                         {
                                             Name (_ADR, 0x03)  // _ADR: Address
                                             Name (_UPC, Package (0x04)  // _UPC: USB Port Capabilities
                                             {
                                                 0xFF, 
-                                                0x09, 
+                                                0x0A, 
                                                 Zero, 
                                                 Zero
                                             })
@@ -714,23 +662,187 @@ SSDT TB3 : bundled with _DSM with real Mac device properties
                                             })
                                             Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
                                             {
-                                                If ((Arg2 == Zero))
-                                                {
-                                                    Return (Buffer (One)
+                                                Local0 = Package (0x04)
                                                     {
-                                                         0x03                                             // .
-                                                    })
-                                                }
-
-                                                Return (Package (0x04)
-                                                {
-                                                    "UsbCPortNumber", 
-                                                    One, 
-                                                    "UsbCompanionPortPresent", 
-                                                    One
-                                                })
+                                                        "UsbCPortNumber", 
+                                                        0x02, 
+                                                        "UsbCompanionPortPresent", 
+                                                        One
+                                                    }
+                                                DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                                                Return (Local0)
                                             }
                                         }
+
+                                        Device (SSP2)
+                                        {
+                                            Name (_ADR, 0x04)  // _ADR: Address
+                                            Name (_UPC, Package (0x04)  // _UPC: USB Port Capabilities
+                                            {
+                                                0xFF, 
+                                                0x0A, 
+                                                Zero, 
+                                                Zero
+                                            })
+                                            Name (_PLD, Package (0x01)  // _PLD: Physical Location of Device
+                                            {
+                                                ToPLD (
+                                                    PLD_Revision           = 0x1,
+                                                    PLD_IgnoreColor        = 0x1,
+                                                    PLD_Red                = 0x0,
+                                                    PLD_Green              = 0x0,
+                                                    PLD_Blue               = 0x0,
+                                                    PLD_Width              = 0x0,
+                                                    PLD_Height             = 0x0,
+                                                    PLD_UserVisible        = 0x1,
+                                                    PLD_Dock               = 0x0,
+                                                    PLD_Lid                = 0x0,
+                                                    PLD_Panel              = "UNKNOWN",
+                                                    PLD_VerticalPosition   = "UPPER",
+                                                    PLD_HorizontalPosition = "LEFT",
+                                                    PLD_Shape              = "UNKNOWN",
+                                                    PLD_GroupOrientation   = 0x0,
+                                                    PLD_GroupToken         = 0x0,
+                                                    PLD_GroupPosition      = 0x0,
+                                                    PLD_Bay                = 0x0,
+                                                    PLD_Ejectable          = 0x0,
+                                                    PLD_EjectRequired      = 0x0,
+                                                    PLD_CabinetNumber      = 0x0,
+                                                    PLD_CardCageNumber     = 0x0,
+                                                    PLD_Reference          = 0x0,
+                                                    PLD_Rotation           = 0x0,
+                                                    PLD_Order              = 0x0,
+                                                    PLD_VerticalOffset     = 0x0,
+                                                    PLD_HorizontalOffset   = 0x0)
+
+                                            })
+                                            Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
+                                            {
+                                                Local0 = Package (0x04)
+                                                    {
+                                                        "UsbCPortNumber", 
+                                                        One, 
+                                                        "UsbCompanionPortPresent", 
+                                                        One
+                                                    }
+                                                DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                                                Return (Local0)
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            Device (DSB4)
+                            {
+                                Name (_ADR, 0x00040000)  // _ADR: Address
+                                Name (_SUN, 0x02)  // _SUN: Slot User Number
+                                OperationRegion (A1E0, PCI_Config, Zero, 0x40)
+                                Field (A1E0, ByteAcc, NoLock, Preserve)
+                                {
+                                    AVND,   32, 
+                                    BMIE,   3, 
+                                    Offset (0x18), 
+                                    PRIB,   8, 
+                                    SECB,   8, 
+                                    SUBB,   8, 
+                                    Offset (0x1E), 
+                                        ,   13, 
+                                    MABT,   1
+                                }
+
+                                OperationRegion (A1E1, PCI_Config, 0xC0, 0x40)
+                                Field (A1E1, ByteAcc, NoLock, Preserve)
+                                {
+                                    Offset (0x01), 
+                                    Offset (0x02), 
+                                    Offset (0x04), 
+                                    Offset (0x08), 
+                                    Offset (0x0A), 
+                                        ,   5, 
+                                    TPEN,   1, 
+                                    Offset (0x0C), 
+                                    SSPD,   4, 
+                                        ,   16, 
+                                    LACR,   1, 
+                                    Offset (0x10), 
+                                        ,   4, 
+                                    LDIS,   1, 
+                                    LRTN,   1, 
+                                    Offset (0x12), 
+                                    CSPD,   4, 
+                                    CWDT,   6, 
+                                        ,   1, 
+                                    LTRN,   1, 
+                                        ,   1, 
+                                    LACT,   1, 
+                                    Offset (0x14), 
+                                    Offset (0x30), 
+                                    TSPD,   4
+                                }
+
+                                OperationRegion (A1E2, PCI_Config, 0x80, 0x08)
+                                Field (A1E2, ByteAcc, NoLock, Preserve)
+                                {
+                                    Offset (0x01), 
+                                    Offset (0x02), 
+                                    Offset (0x04), 
+                                    PSTA,   2
+                                }
+
+                                Method (_BBN, 0, NotSerialized)  // _BBN: BIOS Bus Number
+                                {
+                                    Return (SECB) /* \_SB_.PCI0.RP09.UPSB.DSB4.SECB */
+                                }
+
+                                Method (_STA, 0, NotSerialized)  // _STA: Status
+                                {
+                                    Return (0x0F)
+                                }
+
+                                Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
+                                {
+                                    Return (Zero)
+                                }
+
+                                Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
+                                {
+                                    Local0 = Package (0x06)
+                                        {
+                                            "AAPL,slot-name", 
+                                            Buffer (0x0C)
+                                            {
+                                                "Thunderbolt"
+                                            }, 
+
+                                            "model", 
+                                            Buffer (0x41)
+                                            {
+                                                "Intel JHL6240 Alpine Ridge Thunderbolt 3 DSB4 Bridge (Low Power)"
+                                            }, 
+
+                                            "device_type", 
+                                            Buffer (0x0B)
+                                            {
+                                                "PCI Bridge"
+                                            }
+                                        }
+                                    DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                                    Return (Local0)
+                                }
+
+                                Device (UPS0)
+                                {
+                                    Name (_ADR, Zero)  // _ADR: Address
+                                    OperationRegion (ARE0, PCI_Config, Zero, 0x04)
+                                    Field (ARE0, ByteAcc, NoLock, Preserve)
+                                    {
+                                        AVND,   16
+                                    }
+
+                                    Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
+                                    {
+                                        Return (One)
                                     }
                                 }
                             }
