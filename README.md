@@ -14,12 +14,11 @@
 - CPU: 1.6GHz Intel Core i5-8250U (Kaby Lake-R)
 - Memory: 2x4GB 1,867MHz LPDDR3
 - Harddrive: 256GB PCIe-NVMe M.2 SSD
-- Display: 13-inch IPS-Touch (3,000×2000) 
+- Display: 13-inch IPS-Toucscreen (3,000×2000) 
 - GPU: Intel UHD 620
 - Camera: Front: 2MP, rear: 8MP
 - WLAN: Intel dual-band 8265 Wireless 802.11ac (2 x 2) & Bluetooth 4.1
 - Battery: Integrate Li-Polymer 42Wh internal battery
-- Toucscreen: USB 
 - Audio: Realtek HDA ALC295
 - 2 x USB-C/Thunderbolt 3 Alpine Ridge (power delivery, DisplayPort, data transfer)
 - NanoSIM card/microSD combo slot
