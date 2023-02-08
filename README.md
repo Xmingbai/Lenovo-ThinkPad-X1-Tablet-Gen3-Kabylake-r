@@ -12,15 +12,15 @@
 ## Specification:
 
 - CPU: Intel Core i5-8250u (KabyLake -r) @ 1.60GHz
-- Memory: 1x 8GB DDR4 2666Mhz
+- Memory: 2x 4GB DDR4 1867Mhz
 - Harddrive: 1x 256 PCIe NVMe
 - Display: 13" touch 3000x2000 
 - GPU: Intel UHD 620
 - Camera: 1x IR Camera & RGB 720p HD Camera & Mic with Thinkpad Privacy Shutter
 - WLAN: Intel Wi-Fi 8265\8270 (Soldered on)
 - Battery: Integrate Li-Polymer 50Wh internal battery - Up to 16.5 hours*
-- Touchpad: USB 
-- Audio: Realtek HDA ALC257 (aka ALC3287)
+- Toucscreen: USB 
+- Audio: Realtek HDA ALC295
 - 2 x USB 3.2 Gen 1** (one Always On)
 - 2 x USB 3.2 Gen 1 Type-C (Power Delivery, DisplayPort, Data transfer)
 - 2 x USB 3.2 Gen 2 Type-C / Intel Thunderbolt 3 (Power Delivery, DisplayPort, Data transfer)
@@ -28,7 +28,6 @@
 - Headphone / mic combo
 - Micro-SIM slot
 - HDMI 1.4b
-- RJ45 Gigabit Ethernet I219-LM
  
 
 ## BIOS Settings:V 1.46
@@ -62,29 +61,25 @@ In Display menu, set the following options:
 -  `Boot Display Device` : **Thinkpad LCD**
 -  `Shared Display Priority` : **USB Type-C**
 -  `Total Garphics Memory` : **512MB**
--  `Boot Time Extension` : **Disabled**
-	   
+-  `Boot Time Extension` : **Disabled**	   
    
 ## Working:
 
  - Keyboard (including all Fn keys)
  - Trackpad with gestures / Trackstick
  - Battery indicator
- - Display auto brightness
+ - Display Internal (No work)
  - Audio (Internal and headphone jack)
  - Microphone
  - Ethernet
  - GPU acceleration
  - Camera
- - Intel Wireless / Bluetooth (soldered in so can't be replaced)
+ - Intel Wireless / Bluetooth
  - Sleep / Wake
  - Native CPU power management
  - MicroSD card reader
  - HDMI video and audio 
- - USB-C to HDMI Video and audio works
- - USB-C to USB-C Video but no audio
- - Thunderbolt JHL6240 Alpine Ridge Work whit HotPlug
- 
+ - Thunderbolt JHL6240 Alpine Ridge Work whit HotPlug 
  
 ## Not Tested:
 
@@ -116,7 +111,7 @@ SSDT TB3 : bundled with _DSM with real Mac device properties
             {
                 If (_OSI ("Darwin"))
                 {
-                    Scope (RP01)
+                    Scope (RP09)
                     {
                         Scope (PXSX)
                         {
