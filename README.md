@@ -22,9 +22,7 @@
 - Audio: Realtek HDA ALC295
 - 2 x USB-C/Thunderbolt 3 Alpine Ridge (power delivery, DisplayPort, data transfer)
 - NanoSIM card/microSD combo slot
-- Headphone / mic combo
-- Micro-SIM slot
- 
+- Headphone / mic combo 
 
 ## BIOS Settings:V 1.46
 
