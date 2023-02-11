@@ -406,32 +406,38 @@
                 </dict>
                 <key>PciRoot(0x0)/Pci(0x2,0x0)</key>
                 <dict>
-                    <key>#agdpmod</key>
-                    <string>vit9696</string>
-                    <key>#dpcd-max-link-rate</key>
-                    <data>HgAAAA==</data>
-                    <key>#enable-dpcd-max-link-rate-fix</key>
-                    <data>AQAAAA==</data>
                     <key>AAPL,GfxYTile</key>
                     <data>AQAAAA==</data>
                     <key>AAPL,ig-platform-id</key>
-                    <data>AAAWWQ==</data>
+                    <data>AAAbWQ==</data>
                     <key>AAPL,slot-name</key>
                     <string>Internal</string>
                     <key>device-id</key>
-                    <data>FlkAAA==</data>
+                    <data>G1kAAA==</data>
                     <key>device_type</key>
                     <string>VGA compatible controller</string>
+                    <key>dpcd-max-link-rate</key>
+                    <data>HgAAAA==</data>
                     <key>enable-backlight-registers-fix</key>
+                    <data>AQAAAA==</data>
+                    <key>enable-dpcd-max-link-rate-fix</key>
                     <data>AQAAAA==</data>
                     <key>force-online</key>
                     <data>AQAAAA==</data>
-                    <key>framebuffer-con0-enable</key>
+                    <key>framebuffer-con1-busid</key>
+                    <data>BQAAAA==</data>
+                    <key>framebuffer-con1-enable</key>
                     <data>AQAAAA==</data>
-					<key>framebuffer-con0-busid</key>
-					<data>
-					AQAAAA==
-					</data>					
+                    <key>framebuffer-con1-index</key>
+                    <data>AQAAAA==</data>
+                    <key>framebuffer-con1-type</key>
+                    <data>AAQAAA==</data>
+                    <key>framebuffer-con2-busid</key>
+                    <data>BAAAAA==</data>
+                    <key>framebuffer-con2-enable</key>
+                    <data>AQAAAA==</data>
+                    <key>framebuffer-con2-index</key>
+                    <data>AgAAAA==</data>
                     <key>framebuffer-fbmem</key>
                     <data>AACQAA==</data>
                     <key>framebuffer-patch-enable</key>
@@ -439,7 +445,7 @@
                     <key>framebuffer-stolenmem</key>
                     <data>AAAwAQ==</data>
                     <key>model</key>
-                    <string>Intel(R) UHD Graphics 620</string>
+                    <string>Intel UHD Graphics 620</string>
                 </dict>
                 <key>PciRoot(0x0)/Pci(0x4,0x0)</key>
                 <dict>
@@ -649,6 +655,42 @@
                     <true/>
                     <key>ExecutablePath</key>
                     <string>Contents/MacOS/BlueToolFixup</string>
+                    <key>MaxKernel</key>
+                    <string></string>
+                    <key>MinKernel</key>
+                    <string></string>
+                    <key>PlistPath</key>
+                    <string>Contents/Info.plist</string>
+                </dict>
+                <dict>
+                    <key>Arch</key>
+                    <string>Any</string>
+                    <key>BundlePath</key>
+                    <string>CPUFriend.kext</string>
+                    <key>Comment</key>
+                    <string>V1.2.6</string>
+                    <key>Enabled</key>
+                    <true/>
+                    <key>ExecutablePath</key>
+                    <string>Contents/MacOS/CPUFriend</string>
+                    <key>MaxKernel</key>
+                    <string></string>
+                    <key>MinKernel</key>
+                    <string></string>
+                    <key>PlistPath</key>
+                    <string>Contents/Info.plist</string>
+                </dict>
+                <dict>
+                    <key>Arch</key>
+                    <string>Any</string>
+                    <key>BundlePath</key>
+                    <string>CPUFriendDataProvider.kext</string>
+                    <key>Comment</key>
+                    <string>V1.0.1</string>
+                    <key>Enabled</key>
+                    <true/>
+                    <key>ExecutablePath</key>
+                    <string></string>
                     <key>MaxKernel</key>
                     <string></string>
                     <key>MinKernel</key>
@@ -944,6 +986,42 @@
                     <key>PlistPath</key>
                     <string>Contents/Info.plist</string>
                 </dict>
+                <dict>
+                    <key>Arch</key>
+                    <string>Any</string>
+                    <key>BundlePath</key>
+                    <string>Display-LEN4150.kext</string>
+                    <key>Comment</key>
+                    <string>V9.9.9</string>
+                    <key>Enabled</key>
+                    <false/>
+                    <key>ExecutablePath</key>
+                    <string></string>
+                    <key>MaxKernel</key>
+                    <string></string>
+                    <key>MinKernel</key>
+                    <string></string>
+                    <key>PlistPath</key>
+                    <string>Contents/Info.plist</string>
+                </dict>
+                <dict>
+                    <key>Arch</key>
+                    <string>Any</string>
+                    <key>BundlePath</key>
+                    <string>Display-4c2d-87b.kext</string>
+                    <key>Comment</key>
+                    <string>V9.9.9</string>
+                    <key>Enabled</key>
+                    <false/>
+                    <key>ExecutablePath</key>
+                    <string></string>
+                    <key>MaxKernel</key>
+                    <string></string>
+                    <key>MinKernel</key>
+                    <string></string>
+                    <key>PlistPath</key>
+                    <string>Contents/Info.plist</string>
+                </dict>
             </array>
             <key>Block</key>
             <array/>
@@ -1061,7 +1139,7 @@
             <key>Debug</key>
             <dict>
                 <key>AppleDebug</key>
-                <false/>
+                <true/>
                 <key>ApplePanic</key>
                 <true/>
                 <key>DisableWatchDog</key>
