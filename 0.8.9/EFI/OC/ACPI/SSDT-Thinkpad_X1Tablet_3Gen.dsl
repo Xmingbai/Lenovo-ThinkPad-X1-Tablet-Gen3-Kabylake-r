@@ -10,11 +10,17 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
     External (_SB_.PCI0.LPCB.EC__.HKEY, DeviceObj)
     External (_SB_.PCI0.RP09, DeviceObj)
     External (_SB_.PCI0.RP09.PXSX, DeviceObj)
+    External (_SB_.PCI0.XHC_, DeviceObj)
+    External (_SB_.PCI0.XHC_.RHUB, DeviceObj)
+    External (_SB_.PCI0.XHC_.RHUB.HS06, DeviceObj)
+    External (_SB_.PCI0.XHC_.RHUB.HS07, DeviceObj)
     External (_SB_.SLPB._STA, IntObj)
+    External (_SB_.SPTH, IntObj)
     External (_SB_.UBTC, DeviceObj)
     External (_SI_._SST, MethodObj)    // 1 Arguments
     External (HPTE, FieldUnitObj)
     External (LNUX, IntObj)
+    External (MDE0, IntObj)
     External (WNTF, IntObj)
     External (XPRW, MethodObj)    // 2 Arguments
 
@@ -26,6 +32,7 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
             HPTE = Zero
             LNUX = One
             WNTF = One
+            MDE0 = Zero
         }
 
         Scope (_SB)
@@ -65,6 +72,17 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
                             {
                                 Return (Zero)
                             }
+                        }
+                    }
+                }
+
+                Scope (I2C1)
+                {
+                    Scope (TPL0)
+                    {
+                        If (_OSI ("Darwin"))
+                        {
+                            Name (OSYS, 0x07DC)
                         }
                     }
                 }
@@ -540,6 +558,7 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
                             Device (DSB1)
                             {
                                 Name (_ADR, 0x00010000)  // _ADR: Address
+                                Name (_SUN, One)  // _SUN: Slot User Number
                                 OperationRegion (A1E0, PCI_Config, Zero, 0x40)
                                 Field (A1E0, ByteAcc, NoLock, Preserve)
                                 {
@@ -552,6 +571,45 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
                                     Offset (0x1E), 
                                         ,   13, 
                                     MABT,   1
+                                }
+
+                                OperationRegion (A1E1, PCI_Config, 0xC0, 0x40)
+                                Field (A1E1, ByteAcc, NoLock, Preserve)
+                                {
+                                    Offset (0x01), 
+                                    Offset (0x02), 
+                                    Offset (0x04), 
+                                    Offset (0x08), 
+                                    Offset (0x0A), 
+                                        ,   5, 
+                                    TPEN,   1, 
+                                    Offset (0x0C), 
+                                    SSPD,   4, 
+                                        ,   16, 
+                                    LACR,   1, 
+                                    Offset (0x10), 
+                                        ,   4, 
+                                    LDIS,   1, 
+                                    LRTN,   1, 
+                                    Offset (0x12), 
+                                    CSPD,   4, 
+                                    CWDT,   6, 
+                                        ,   1, 
+                                    LTRN,   1, 
+                                        ,   1, 
+                                    LACT,   1, 
+                                    Offset (0x14), 
+                                    Offset (0x30), 
+                                    TSPD,   4
+                                }
+
+                                OperationRegion (A1E2, PCI_Config, 0x80, 0x08)
+                                Field (A1E2, ByteAcc, NoLock, Preserve)
+                                {
+                                    Offset (0x01), 
+                                    Offset (0x02), 
+                                    Offset (0x04), 
+                                    PSTA,   2
                                 }
 
                                 Method (_BBN, 0, NotSerialized)  // _BBN: BIOS Bus Number
@@ -609,7 +667,7 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
 
                                     Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
                                     {
-                                        Return (Zero)
+                                        Return (One)
                                     }
 
                                     Device (DSB0)
@@ -644,7 +702,7 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
 
                                         Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
                                         {
-                                            Return (Zero)
+                                            Return (One)
                                         }
 
                                         Device (DEV0)
@@ -657,7 +715,7 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
 
                                             Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
                                             {
-                                                Return (Zero)
+                                                Return (One)
                                             }
                                         }
                                     }
@@ -691,7 +749,7 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
 
                                         Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
                                         {
-                                            Return (Zero)
+                                            Return (One)
                                         }
 
                                         Device (UPS0)
@@ -705,7 +763,7 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
 
                                             Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
                                             {
-                                                Return (Zero)
+                                                Return (One)
                                             }
 
                                             Device (DSB0)
@@ -777,7 +835,7 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
 
                                                 Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
                                                 {
-                                                    Return (Zero)
+                                                    Return (One)
                                                 }
 
                                                 Device (DEV0)
@@ -790,7 +848,7 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
 
                                                     Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
                                                     {
-                                                        Return (Zero)
+                                                        Return (One)
                                                     }
                                                 }
                                             }
@@ -824,7 +882,7 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
 
                                                 Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
                                                 {
-                                                    Return (Zero)
+                                                    Return (One)
                                                 }
 
                                                 Device (DEV0)
@@ -837,7 +895,7 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
 
                                                     Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
                                                     {
-                                                        Return (Zero)
+                                                        Return (One)
                                                     }
                                                 }
                                             }
@@ -871,7 +929,7 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
 
                                                 Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
                                                 {
-                                                    Return (Zero)
+                                                    Return (One)
                                                 }
                                             }
 
@@ -904,7 +962,7 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
 
                                                 Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
                                                 {
-                                                    Return (Zero)
+                                                    Return (One)
                                                 }
                                             }
                                         }
@@ -939,7 +997,7 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
 
                                         Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
                                         {
-                                            Return (Zero)
+                                            Return (One)
                                         }
 
                                         Device (UPS0)
@@ -953,7 +1011,7 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
 
                                             Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
                                             {
-                                                Return (Zero)
+                                                Return (One)
                                             }
 
                                             Device (DSB0)
@@ -996,7 +1054,7 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
 
                                                     Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
                                                     {
-                                                        Return (Zero)
+                                                        Return (One)
                                                     }
                                                 }
                                             }
@@ -1030,7 +1088,7 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
 
                                                 Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
                                                 {
-                                                    Return (Zero)
+                                                    Return (One)
                                                 }
 
                                                 Device (DEV0)
@@ -1043,7 +1101,7 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
 
                                                     Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
                                                     {
-                                                        Return (Zero)
+                                                        Return (One)
                                                     }
                                                 }
                                             }
@@ -1077,7 +1135,7 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
 
                                                 Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
                                                 {
-                                                    Return (Zero)
+                                                    Return (One)
                                                 }
 
                                                 Device (DEV0)
@@ -1090,7 +1148,7 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
 
                                                     Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
                                                     {
-                                                        Return (Zero)
+                                                        Return (One)
                                                     }
                                                 }
                                             }
@@ -1124,7 +1182,7 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
 
                                                 Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
                                                 {
-                                                    Return (Zero)
+                                                    Return (One)
                                                 }
                                             }
 
@@ -1157,7 +1215,7 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
 
                                                 Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
                                                 {
-                                                    Return (Zero)
+                                                    Return (One)
                                                 }
                                             }
                                         }
@@ -1192,7 +1250,7 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
 
                                         Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
                                         {
-                                            Return (Zero)
+                                            Return (One)
                                         }
                                     }
 
@@ -1225,7 +1283,7 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
 
                                         Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
                                         {
-                                            Return (Zero)
+                                            Return (One)
                                         }
                                     }
                                 }
@@ -1300,6 +1358,18 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
                                 Device (XHC2)
                                 {
                                     Name (_ADR, Zero)  // _ADR: Address
+                                    Name (HS, Package (0x01)
+                                    {
+                                        "XHC"
+                                    })
+                                    Name (FS, Package (0x01)
+                                    {
+                                        "XHC"
+                                    })
+                                    Name (LS, Package (0x01)
+                                    {
+                                        "XHC"
+                                    })
                                     Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
                                     {
                                         Return (Package (0x02)
@@ -1399,12 +1469,27 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
                                                     PLD_HorizontalOffset   = 0x0)
 
                                             })
+                                            Name (HS, Package (0x02)
+                                            {
+                                                "XHC", 
+                                                0x06
+                                            })
+                                            Name (FS, Package (0x02)
+                                            {
+                                                "XHC", 
+                                                0x06
+                                            })
+                                            Name (LS, Package (0x02)
+                                            {
+                                                "XHC", 
+                                                0x06
+                                            })
                                             Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
                                             {
                                                 Local0 = Package (0x04)
                                                     {
                                                         "UsbCPortNumber", 
-                                                        0x02, 
+                                                        One, 
                                                         "UsbCompanionPortPresent", 
                                                         One
                                                     }
@@ -1455,12 +1540,27 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
                                                     PLD_HorizontalOffset   = 0x0)
 
                                             })
+                                            Name (HS, Package (0x02)
+                                            {
+                                                "XHC", 
+                                                0x07
+                                            })
+                                            Name (FS, Package (0x02)
+                                            {
+                                                "XHC", 
+                                                0x07
+                                            })
+                                            Name (LS, Package (0x02)
+                                            {
+                                                "XHC", 
+                                                0x07
+                                            })
                                             Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
                                             {
                                                 Local0 = Package (0x04)
                                                     {
                                                         "UsbCPortNumber", 
-                                                        One, 
+                                                        0x02, 
                                                         "UsbCompanionPortPresent", 
                                                         One
                                                     }
@@ -1475,6 +1575,7 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
                             Device (DSB4)
                             {
                                 Name (_ADR, 0x00040000)  // _ADR: Address
+                                Name (_SUN, 0x02)  // _SUN: Slot User Number
                                 OperationRegion (A1E0, PCI_Config, Zero, 0x40)
                                 Field (A1E0, ByteAcc, NoLock, Preserve)
                                 {
@@ -1487,6 +1588,45 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
                                     Offset (0x1E), 
                                         ,   13, 
                                     MABT,   1
+                                }
+
+                                OperationRegion (A1E1, PCI_Config, 0xC0, 0x40)
+                                Field (A1E1, ByteAcc, NoLock, Preserve)
+                                {
+                                    Offset (0x01), 
+                                    Offset (0x02), 
+                                    Offset (0x04), 
+                                    Offset (0x08), 
+                                    Offset (0x0A), 
+                                        ,   5, 
+                                    TPEN,   1, 
+                                    Offset (0x0C), 
+                                    SSPD,   4, 
+                                        ,   16, 
+                                    LACR,   1, 
+                                    Offset (0x10), 
+                                        ,   4, 
+                                    LDIS,   1, 
+                                    LRTN,   1, 
+                                    Offset (0x12), 
+                                    CSPD,   4, 
+                                    CWDT,   6, 
+                                        ,   1, 
+                                    LTRN,   1, 
+                                        ,   1, 
+                                    LACT,   1, 
+                                    Offset (0x14), 
+                                    Offset (0x30), 
+                                    TSPD,   4
+                                }
+
+                                OperationRegion (A1E2, PCI_Config, 0x80, 0x08)
+                                Field (A1E2, ByteAcc, NoLock, Preserve)
+                                {
+                                    Offset (0x01), 
+                                    Offset (0x02), 
+                                    Offset (0x04), 
+                                    PSTA,   2
                                 }
 
                                 Method (_BBN, 0, NotSerialized)  // _BBN: BIOS Bus Number
@@ -1544,7 +1684,7 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
 
                                     Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
                                     {
-                                        Return (Zero)
+                                        Return (One)
                                     }
 
                                     Device (DSB0)
@@ -1579,7 +1719,7 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
 
                                         Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
                                         {
-                                            Return (Zero)
+                                            Return (One)
                                         }
 
                                         Device (DEV0)
@@ -1592,7 +1732,7 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
 
                                             Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
                                             {
-                                                Return (Zero)
+                                                Return (One)
                                             }
                                         }
                                     }
@@ -1626,7 +1766,7 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
 
                                         Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
                                         {
-                                            Return (Zero)
+                                            Return (One)
                                         }
 
                                         Device (UPS0)
@@ -1640,7 +1780,7 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
 
                                             Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
                                             {
-                                                Return (Zero)
+                                                Return (One)
                                             }
 
                                             Device (DSB0)
@@ -1712,7 +1852,7 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
 
                                                 Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
                                                 {
-                                                    Return (Zero)
+                                                    Return (One)
                                                 }
 
                                                 Device (DEV0)
@@ -1725,7 +1865,7 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
 
                                                     Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
                                                     {
-                                                        Return (Zero)
+                                                        Return (One)
                                                     }
                                                 }
                                             }
@@ -1759,7 +1899,7 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
 
                                                 Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
                                                 {
-                                                    Return (Zero)
+                                                    Return (One)
                                                 }
 
                                                 Device (DEV0)
@@ -1772,7 +1912,7 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
 
                                                     Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
                                                     {
-                                                        Return (Zero)
+                                                        Return (One)
                                                     }
                                                 }
                                             }
@@ -1806,7 +1946,7 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
 
                                                 Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
                                                 {
-                                                    Return (Zero)
+                                                    Return (One)
                                                 }
                                             }
 
@@ -1839,7 +1979,7 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
 
                                                 Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
                                                 {
-                                                    Return (Zero)
+                                                    Return (One)
                                                 }
                                             }
                                         }
@@ -1874,7 +2014,7 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
 
                                         Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
                                         {
-                                            Return (Zero)
+                                            Return (One)
                                         }
 
                                         Device (UPS0)
@@ -1888,7 +2028,7 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
 
                                             Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
                                             {
-                                                Return (Zero)
+                                                Return (One)
                                             }
 
                                             Device (DSB0)
@@ -1931,7 +2071,7 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
 
                                                     Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
                                                     {
-                                                        Return (Zero)
+                                                        Return (One)
                                                     }
                                                 }
                                             }
@@ -1965,7 +2105,7 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
 
                                                 Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
                                                 {
-                                                    Return (Zero)
+                                                    Return (One)
                                                 }
 
                                                 Device (DEV0)
@@ -1978,7 +2118,7 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
 
                                                     Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
                                                     {
-                                                        Return (Zero)
+                                                        Return (One)
                                                     }
                                                 }
                                             }
@@ -2012,7 +2152,7 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
 
                                                 Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
                                                 {
-                                                    Return (Zero)
+                                                    Return (One)
                                                 }
 
                                                 Device (DEV0)
@@ -2025,7 +2165,7 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
 
                                                     Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
                                                     {
-                                                        Return (Zero)
+                                                        Return (One)
                                                     }
                                                 }
                                             }
@@ -2059,7 +2199,7 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
 
                                                 Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
                                                 {
-                                                    Return (Zero)
+                                                    Return (One)
                                                 }
                                             }
 
@@ -2092,7 +2232,7 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
 
                                                 Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
                                                 {
-                                                    Return (Zero)
+                                                    Return (One)
                                                 }
                                             }
                                         }
@@ -2127,7 +2267,7 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
 
                                         Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
                                         {
-                                            Return (Zero)
+                                            Return (One)
                                         }
                                     }
 
@@ -2160,7 +2300,7 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
 
                                         Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
                                         {
-                                            Return (Zero)
+                                            Return (One)
                                         }
                                     }
                                 }
@@ -2183,6 +2323,64 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
                             Return (Zero)
                         }
                     }
+                }
+
+                Scope (XHC)
+                {
+                    Scope (RHUB)
+                    {
+                        If (_OSI ("Darwin"))
+                        {
+                            Scope (HS06)
+                            {
+                                Name (SSP, Package (0x02)
+                                {
+                                    "XHC2", 
+                                    0x03
+                                })
+                                Name (SS, Package (0x02)
+                                {
+                                    "XHC2", 
+                                    0x03
+                                })
+                                Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
+                                {
+                                    Local0 = Package (0x00){}
+                                    DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                                    Return (Local0)
+                                }
+                            }
+
+                            Scope (HS07)
+                            {
+                                Name (SSP, Package (0x02)
+                                {
+                                    "XHC2", 
+                                    0x04
+                                })
+                                Name (SS, Package (0x02)
+                                {
+                                    "XHC2", 
+                                    0x04
+                                })
+                                Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
+                                {
+                                    Local0 = Package (0x00){}
+                                    DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                                    Return (Local0)
+                                }
+                            }
+                        }
+                    }
+
+                    Name (SSP, Package (0x01)
+                    {
+                        "XHC2"
+                    })
+                    Name (SS, Package (0x01)
+                    {
+                        "XHC2"
+                    })
                 }
             }
 
