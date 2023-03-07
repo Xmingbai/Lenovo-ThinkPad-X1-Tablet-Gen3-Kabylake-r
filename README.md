@@ -70,7 +70,7 @@ In Display menu, set the following options:
  - Native CPU power management
  - MicroSD card reader
  - HDMI video and audio 
- - Thunderbolt JHL6240 Alpine Ridge Work whit HotPlug 
+ - Thunderbolt JHL6540 Alpine Ridge Work whit HotPlug 
  
 ## Not Work:
 
