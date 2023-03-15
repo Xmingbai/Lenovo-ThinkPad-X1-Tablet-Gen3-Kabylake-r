@@ -74,8 +74,6 @@ In Display menu, set the following options:
  
 ## Not Work:
 
- - Display Internal No work Bios blocked, (impossible to adapt DVMT to 128 to be able to display 3k or higher signals)
-
 ## USB Map:
 
 ![Lenovo](./Screenshot/3.png)
