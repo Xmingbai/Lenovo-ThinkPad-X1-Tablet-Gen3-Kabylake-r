@@ -81,6 +81,7 @@ In Display menu, set the following options:
 ## Video Output:
 
 ![Lenovo](./Screenshot/4.png)
+![Lenovo](./Screenshot/11.png)
 
 ## SSDT Full Hack
 
