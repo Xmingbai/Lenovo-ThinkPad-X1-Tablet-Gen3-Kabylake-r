@@ -89,7 +89,7 @@ In Display menu, set the following options:
 ![Lenovo](./Screenshot/5.png)
 ![Lenovo](./Screenshot/6.png)
 
-## Patch IGP:
+## Patch IGPU:
 
 ```
                 <key>PciRoot(0x0)/Pci(0x2,0x0)</key>
