@@ -58,15 +58,13 @@ In Display menu, set the following options:
 ## Working:
 
  - Keyboard (including all Fn keys)
- - Trackpad with gestures / Trackstick
+ - Touchscreen with gestures / Trackstick
  - Battery indicator
  - Audio (Internal and headphone jack)
  - Microphone
- - Ethernet
  - GPU acceleration
  - Camera
  - Intel Wireless / Bluetooth
- - Sleep / Wake
  - Native CPU power management
  - MicroSD card reader
  - HDMI video and audio 
@@ -74,6 +72,9 @@ In Display menu, set the following options:
  
 ## Not Work:
 
+ - Trackpad (USB)
+ - Sleep\Wake
+ 
 ## USB Map:
 
 ![Lenovo](./Screenshot/3.png)
