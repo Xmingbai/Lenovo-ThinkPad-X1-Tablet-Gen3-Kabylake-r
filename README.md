@@ -92,49 +92,45 @@ In Display menu, set the following options:
 ## Patch IGP:
 
 ```
-<key>PciRoot(0x0)/Pci(0x2,0x0)</key>
-<dict>
-    <key>AAPL,GfxYTile</key>
-    <data>AQAAAA==</data>
-    <key>AAPL,ig-platform-id</key>
-    <data>BwCbPg==</data>
-    <key>AAPL,slot-name</key>
-    <string>Internal@0,2,0</string>
-    <key>device-id</key>
-    <data>mz4AAA==</data>
-    <key>device_type</key>
-    <string>VGA compatible controller</string>
-    <key>enable-hdmi-dividers-fix</key>
-    <data>AQAAAA==</data>
-    <key>framebuffer-con0-busid</key>
-    <data>AQAAAA==</data>
-    <key>framebuffer-con0-enable</key>
-    <data>AQAAAA==</data>
-    <key>framebuffer-con0-type</key>
-    <data>AAgAAA==</data>
-    <key>framebuffer-con1-enable</key>
-    <data>AQAAAA==</data>
-    <key>framebuffer-con1-index</key>
-    <data>AwAAAA==</data>
-    <key>framebuffer-con1-type</key>
-    <data>AAgAAA==</data>
-    <key>framebuffer-con2-busid</key>
-    <data>AAAAAA==</data>
-    <key>framebuffer-con2-enable</key>
-    <data>AQAAAA==</data>
-    <key>framebuffer-con2-flags</key>
-    <data>IAAAAA==</data>
-    <key>framebuffer-con2-index</key>
-    <data>/////w==</data>
-    <key>framebuffer-con2-pipe</key>
-    <data>AAAAAA==</data>
-    <key>framebuffer-con2-type</key>
-    <data>AQAAAA==</data>
-    <key>framebuffer-patch-enable</key>
-    <data>AQAAAA==</data>
-    <key>model</key>
-    <string>Intel UHD Graphics 630</string>
-</dict>
+                <key>PciRoot(0x0)/Pci(0x2,0x0)</key>
+                <dict>
+                    <key>AAPL,GfxYTile</key>
+                    <data>AQAAAA==</data>
+                    <key>AAPL,ig-platform-id</key>
+                    <data>AAAbWQ==</data>
+                    <key>AAPL,slot-name</key>
+                    <string>Internal</string>
+                    <key>device-id</key>
+                    <data>G1kAAA==</data>
+                    <key>device_type</key>
+                    <string>VGA compatible controller</string>
+                    <key>force-online</key>
+                    <data>AQAAAA==</data>
+                    <key>framebuffer-con1-busid</key>
+                    <data>BQAAAA==</data>
+                    <key>framebuffer-con1-enable</key>
+                    <data>AQAAAA==</data>
+                    <key>framebuffer-con1-index</key>
+                    <data>AQAAAA==</data>
+                    <key>framebuffer-con2-busid</key>
+                    <data>BAAAAA==</data>
+                    <key>framebuffer-con2-enable</key>
+                    <data>AQAAAA==</data>
+                    <key>framebuffer-con2-index</key>
+                    <data>AgAAAA==</data>
+                    <key>framebuffer-con2-type</key>
+                    <data>AAQAAA==</data>
+                    <key>framebuffer-fbmem</key>
+                    <data>AACQAA==</data>
+                    <key>framebuffer-patch-enable</key>
+                    <data>AQAAAA==</data>
+                    <key>framebuffer-stolenmem</key>
+                    <data>AACgAQ==</data>
+                    <key>framebuffer-unifiedmem</key>
+                    <data>/////w==</data>
+                    <key>model</key>
+                    <string>Intel Graphics UHD 620</string>
+                </dict>
 ```
 
 ## SSDT TB3 : bundled with _DSM with real Mac device properties
