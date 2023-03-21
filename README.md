@@ -4,7 +4,7 @@
 [![](https://img.shields.io/badge/Facebook-HackintoshLifeIT-informational?style=flat&logo=facebook&logoColor=white&color=3a4dc9)](https://www.facebook.com/hackintoshlife/)
 [![](https://img.shields.io/badge/Instagram-HackintoshLifeIT-informational?style=flat&logo=instagram&logoColor=white&color=8a178a)](https://www.instagram.com/hackintoshlife.it_official/)
 
-# Lenovo ThinkPad X1 Tablet 3°Gen Type 20KK Hackintosh 
+# Lenovo ThinkPad X1 Tablet 3°Gen Type 20KK Hackintosh MacOS Ventura\Monterey
 
 ![Lenovo](./Screenshot/1.jpg)
 ![Lenovo](./Screenshot/2.jpg)
@@ -89,7 +89,55 @@ In Display menu, set the following options:
 ![Lenovo](./Screenshot/5.png)
 ![Lenovo](./Screenshot/6.png)
 
-SSDT TB3 : bundled with _DSM with real Mac device properties
+## Patch IGP:
+
+```
+<key>PciRoot(0x0)/Pci(0x2,0x0)</key>
+<dict>
+    <key>AAPL,GfxYTile</key>
+    <data>AQAAAA==</data>
+    <key>AAPL,ig-platform-id</key>
+    <data>BwCbPg==</data>
+    <key>AAPL,slot-name</key>
+    <string>Internal@0,2,0</string>
+    <key>device-id</key>
+    <data>mz4AAA==</data>
+    <key>device_type</key>
+    <string>VGA compatible controller</string>
+    <key>enable-hdmi-dividers-fix</key>
+    <data>AQAAAA==</data>
+    <key>framebuffer-con0-busid</key>
+    <data>AQAAAA==</data>
+    <key>framebuffer-con0-enable</key>
+    <data>AQAAAA==</data>
+    <key>framebuffer-con0-type</key>
+    <data>AAgAAA==</data>
+    <key>framebuffer-con1-enable</key>
+    <data>AQAAAA==</data>
+    <key>framebuffer-con1-index</key>
+    <data>AwAAAA==</data>
+    <key>framebuffer-con1-type</key>
+    <data>AAgAAA==</data>
+    <key>framebuffer-con2-busid</key>
+    <data>AAAAAA==</data>
+    <key>framebuffer-con2-enable</key>
+    <data>AQAAAA==</data>
+    <key>framebuffer-con2-flags</key>
+    <data>IAAAAA==</data>
+    <key>framebuffer-con2-index</key>
+    <data>/////w==</data>
+    <key>framebuffer-con2-pipe</key>
+    <data>AAAAAA==</data>
+    <key>framebuffer-con2-type</key>
+    <data>AQAAAA==</data>
+    <key>framebuffer-patch-enable</key>
+    <data>AQAAAA==</data>
+    <key>model</key>
+    <string>Intel UHD Graphics 630</string>
+</dict>
+```
+
+## SSDT TB3 : bundled with _DSM with real Mac device properties
 
 ```
     Scope (\)
