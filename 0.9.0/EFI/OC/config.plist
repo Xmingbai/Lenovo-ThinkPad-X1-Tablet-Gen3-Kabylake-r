@@ -930,7 +930,7 @@
                     <key>Arch</key>
                     <string>Any</string>
                     <key>BundlePath</key>
-                    <string>VoodooI2CHID.kext</string>
+                    <string>VoodooI2CHID_V2.6.5_X1Tablet.kext</string>
                     <key>Comment</key>
                     <string>V1</string>
                     <key>Enabled</key>
