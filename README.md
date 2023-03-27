@@ -51,8 +51,10 @@ In Thunderbolt menu, set the following options:
 -  `Support in Pre Boot Environment > Thunderbolt(TM) device`: **No**
 
 In Display menu, set the following options:
-    
+         
 -  `Boot Display Device` : **LCD**
+-  `Shared Display Priority` **HDMI**
+-  `Total Garphics Memory` : **512MB**
 -  `Boot Time Extension` : **Disabled**	   
    
 ## Working:
