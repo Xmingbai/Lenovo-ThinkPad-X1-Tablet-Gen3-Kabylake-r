@@ -91,6 +91,11 @@ In Display menu, set the following options:
 ![Lenovo](./Screenshot/5.png)
 ![Lenovo](./Screenshot/6.png)
 
+## HWMonitor
+
+![Lenovo](./Screenshot/12.png)
+![Lenovo](./Screenshot/13.png)
+
 ## Patch IGPU:
 
 ```
