@@ -101,7 +101,6 @@ In Display menu, set the following options:
 ```
                 <key>PciRoot(0x0)/Pci(0x2,0x0)</key>
                 <dict>
-
                     <key>AAPL,GfxYTile</key>
                     <data>AQAAAA==</data>
                     <key>AAPL,ig-platform-id</key>
