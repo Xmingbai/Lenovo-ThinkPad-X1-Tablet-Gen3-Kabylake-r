@@ -54,7 +54,7 @@ In Display menu, set the following options:
          
 -  `Boot Display Device` : **LCD**
 -  `Shared Display Priority` **HDMI**
--  `Total Garphics Memory` : **512MB**
+-  `Total Garphics Memory` : **512MB** If you set it like this in Bios you can delete framebuffer-fbmem | Data | 00009000 in patch IGPU.
 -  `Boot Time Extension` : **Disabled**	   
    
 ## Working:
