@@ -59,11 +59,10 @@ In Display menu, set the following options:
    
 ## Working:
 
- - Keyboard (including all Fn keys)
+ - Keyboard ()
  - Touchscreen with gestures / Trackstick
  - Battery indicator
- - Audio (Internal and headphone jack)
- - Microphone
+ - Audio (Internal)
  - GPU acceleration
  - Camera
  - Intel Wireless / Bluetooth
@@ -76,6 +75,7 @@ In Display menu, set the following options:
 
  - Trackpad (USB)
  - Sleep\Wake
+- Microphone 
  
 ## USB Map:
 
