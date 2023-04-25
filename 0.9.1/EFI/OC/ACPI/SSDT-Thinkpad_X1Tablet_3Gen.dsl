@@ -1,3 +1,23 @@
+/*
+ * Intel ACPI Component Architecture
+ * AML/ASL+ Disassembler version 20200925 (64-bit version)
+ * Copyright (c) 2000 - 2020 Intel Corporation
+ * 
+ * Disassembling to symbolic ASL+ operators
+ *
+ * Disassembly of iASL8lu7FT.aml, Tue Apr 25 23:03:38 2023
+ *
+ * Original Table Header:
+ *     Signature        "SSDT"
+ *     Length           0x00002111 (8465)
+ *     Revision         0x02
+ *     Checksum         0x29
+ *     OEM ID           "Hack"
+ *     OEM Table ID     "X1Tablet"
+ *     OEM Revision     0x00000000 (0)
+ *     Compiler ID      "INTL"
+ *     Compiler Version 0x20200925 (538970405)
+ */
 DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
 {
     External (_SB_.PCI0, DeviceObj)
@@ -11,10 +31,10 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
     External (_SB_.PCI0.LPCB.EC__.HKEY, DeviceObj)
     External (_SB_.PCI0.RP09, DeviceObj)
     External (_SB_.PCI0.RP09.PXSX, DeviceObj)
+    External (_SB_.PCI0.XHC_, DeviceObj)
     External (_SB_.SLPB._STA, UnknownObj)
     External (_SI_._SST, MethodObj)    // 1 Arguments
     External (HPTE, FieldUnitObj)
-    External (MDE0, IntObj)
     External (XPRW, MethodObj)    // 2 Arguments
 
     Scope (\)
@@ -23,7 +43,6 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
         {
             \_SB.SLPB._STA = 0x0B
             HPTE = Zero
-            MDE0 = Zero
         }
 
         Scope (_SB)
@@ -1337,18 +1356,6 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
                                 Device (XHC2)
                                 {
                                     Name (_ADR, Zero)  // _ADR: Address
-                                    Name (HS, Package (0x01)
-                                    {
-                                        "XHC"
-                                    })
-                                    Name (FS, Package (0x01)
-                                    {
-                                        "XHC"
-                                    })
-                                    Name (LS, Package (0x01)
-                                    {
-                                        "XHC"
-                                    })
                                     Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
                                     {
                                         Return (Package (0x02)
@@ -2270,6 +2277,17 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
                         Else
                         {
                             Return (Zero)
+                        }
+                    }
+                }
+
+                Scope (XHC)
+                {
+                    If (_OSI ("Darwin"))
+                    {
+                        Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
+                        {
+                            Return (GPRW (0x6D, Zero))
                         }
                     }
                 }
