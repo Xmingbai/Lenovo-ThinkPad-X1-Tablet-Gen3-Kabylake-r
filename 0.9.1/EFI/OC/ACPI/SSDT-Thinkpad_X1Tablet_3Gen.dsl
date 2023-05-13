@@ -1,23 +1,3 @@
-/*
- * Intel ACPI Component Architecture
- * AML/ASL+ Disassembler version 20200925 (64-bit version)
- * Copyright (c) 2000 - 2020 Intel Corporation
- * 
- * Disassembling to symbolic ASL+ operators
- *
- * Disassembly of iASL8lu7FT.aml, Tue Apr 25 23:03:38 2023
- *
- * Original Table Header:
- *     Signature        "SSDT"
- *     Length           0x00002111 (8465)
- *     Revision         0x02
- *     Checksum         0x29
- *     OEM ID           "Hack"
- *     OEM Table ID     "X1Tablet"
- *     OEM Revision     0x00000000 (0)
- *     Compiler ID      "INTL"
- *     Compiler Version 0x20200925 (538970405)
- */
 DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
 {
     External (_SB_.PCI0, DeviceObj)
@@ -26,11 +6,13 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
     External (_SB_.PCI0.I2C1.TPL0, DeviceObj)
     External (_SB_.PCI0.I2C1.TPL0._STA, IntObj)
     External (_SB_.PCI0.LPCB, DeviceObj)
+    External (_SB_.PCI0.LPCB.ARTC, DeviceObj)
     External (_SB_.PCI0.LPCB.EC__, DeviceObj)
     External (_SB_.PCI0.LPCB.EC__.AC__, DeviceObj)
     External (_SB_.PCI0.LPCB.EC__.HKEY, DeviceObj)
     External (_SB_.PCI0.RP09, DeviceObj)
     External (_SB_.PCI0.RP09.PXSX, DeviceObj)
+    External (_SB_.PCI0.SBUS, DeviceObj)
     External (_SB_.PCI0.XHC_, DeviceObj)
     External (_SB_.SLPB._STA, UnknownObj)
     External (_SI_._SST, MethodObj)    // 1 Arguments
@@ -99,6 +81,27 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
 
                 Scope (LPCB)
                 {
+                    Device (ARTC)
+                    {
+                        Name (_HID, "ACPI000E" /* Time and Alarm Device */)  // _HID: Hardware ID
+                        Method (_GCP, 0, NotSerialized)  // _GCP: Get Capabilities
+                        {
+                            Return (0x05)
+                        }
+
+                        Method (_STA, 0, NotSerialized)  // _STA: Status
+                        {
+                            If (_OSI ("Darwin"))
+                            {
+                                Return (0x0F)
+                            }
+                            Else
+                            {
+                                Return (Zero)
+                            }
+                        }
+                    }
+
                     Device (DMAC)
                     {
                         Name (_HID, EisaId ("PNP0200") /* PC-class DMA Controller */)  // _HID: Hardware ID
@@ -1402,8 +1405,6 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
                                                 "USBBusNumber", 
                                                 Zero, 
                                                 "UsbCompanionControllerPresent", 
-                                                One, 
-                                                "AAPL,XHC-clock-id", 
                                                 One
                                             }
                                         DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
@@ -1460,7 +1461,7 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
                                                 Local0 = Package (0x04)
                                                     {
                                                         "UsbCPortNumber", 
-                                                        One, 
+                                                        0x02, 
                                                         "UsbCompanionPortPresent", 
                                                         One
                                                     }
@@ -1516,7 +1517,7 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
                                                 Local0 = Package (0x04)
                                                     {
                                                         "UsbCPortNumber", 
-                                                        0x02, 
+                                                        One, 
                                                         "UsbCompanionPortPresent", 
                                                         One
                                                     }
@@ -2260,6 +2261,77 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
                                         }
                                     }
                                 }
+                            }
+                        }
+                    }
+                }
+
+                Scope (SBUS)
+                {
+                    Device (BUS0)
+                    {
+                        Name (_CID, "smbus")  // _CID: Compatible ID
+                        Name (_ADR, Zero)  // _ADR: Address
+                        Device (BLC0)
+                        {
+                            Name (_ADR, Zero)  // _ADR: Address
+                            Name (_CID, "smbus-blc")  // _CID: Compatible ID
+                            Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
+                            {
+                                If ((Arg2 == Zero))
+                                {
+                                    Return (Buffer (One)
+                                    {
+                                         0x03                                             // .
+                                    })
+                                }
+
+                                Return (Package (0x0E)
+                                {
+                                    "refnum", 
+                                    Zero, 
+                                    "address", 
+                                    Zero, 
+                                    "version", 
+                                    0x03, 
+                                    "fault-off", 
+                                    0x03, 
+                                    "fault-len", 
+                                    0x04, 
+                                    "type", 
+                                    0x49324300, 
+                                    "command", 
+                                    Zero
+                                })
+                            }
+
+                            Method (_STA, 0, NotSerialized)  // _STA: Status
+                            {
+                                If (_OSI ("Darwin"))
+                                {
+                                    Return (0x0F)
+                                }
+                                Else
+                                {
+                                    Return (Zero)
+                                }
+                            }
+                        }
+                    }
+
+                    Device (BUS1)
+                    {
+                        Name (_CID, "smbus")  // _CID: Compatible ID
+                        Name (_ADR, One)  // _ADR: Address
+                        Method (_STA, 0, NotSerialized)  // _STA: Status
+                        {
+                            If (_OSI ("Darwin"))
+                            {
+                                Return (0x0F)
+                            }
+                            Else
+                            {
+                                Return (Zero)
                             }
                         }
                     }

@@ -8,7 +8,7 @@
             <array>
                 <dict>
                     <key>Comment</key>
-                    <string></string>
+                    <string>SSDT Full Hack</string>
                     <key>Enabled</key>
                     <true/>
                     <key>Path</key>
@@ -172,6 +172,8 @@
                 <dict>
                     <key>AAPL,slot-name</key>
                     <string>Internal@0,20,0</string>
+                    <key>acpi-wake-type</key>
+                    <data>AQAAAA==</data>
                     <key>device_type</key>
                     <string>USB controller</string>
                     <key>model</key>
@@ -418,15 +420,6 @@
                     <key>model</key>
                     <string>Sunrise Point-LP HD Audio</string>
                 </dict>
-                <key>PciRoot(0x0)/Pci(0x1F,0x4)</key>
-                <dict>
-                    <key>AAPL,slot-name</key>
-                    <string>Internal@0,31,4</string>
-                    <key>device_type</key>
-                    <string>SMBus</string>
-                    <key>model</key>
-                    <string>Sunrise Point-LP SMBus</string>
-                </dict>
                 <key>PciRoot(0x0)/Pci(0x2,0x0)</key>
                 <dict>
                     <key>AAPL,GfxYTile</key>
@@ -439,8 +432,6 @@
                     <data>wIcAAA==</data>
                     <key>device_type</key>
                     <string>VGA compatible controller</string>
-                    <key>disable-agdc</key>
-                    <data>AQAAAA==</data>
                     <key>force-online</key>
                     <data>AQAAAA==</data>
                     <key>framebuffer-patch-enable</key>
@@ -449,6 +440,8 @@
                     <data>AACgAQ==</data>
                     <key>framebuffer-unifiedmem</key>
                     <data>AAAAwA==</data>
+                    <key>graphic-options</key>
+                    <data>DAAAAA==</data>
                     <key>model</key>
                     <string>Intel Graphics UHD 620</string>
                 </dict>
@@ -779,13 +772,13 @@
                     <key>Arch</key>
                     <string>Any</string>
                     <key>BundlePath</key>
-                    <string>BrightnessKeys.kext</string>
+                    <string>RestrictEvents.kext</string>
                     <key>Comment</key>
-                    <string>V1.0.3</string>
+                    <string>V1.1.1</string>
                     <key>Enabled</key>
                     <true/>
                     <key>ExecutablePath</key>
-                    <string>Contents/MacOS/BrightnessKeys</string>
+                    <string>Contents/MacOS/RestrictEvents</string>
                     <key>MaxKernel</key>
                     <string></string>
                     <key>MinKernel</key>
@@ -799,7 +792,7 @@
                     <key>BundlePath</key>
                     <string>VoodooI2C_V2.6.5_X1Tablet.kext/Contents/PlugIns/VoodooInput.kext</string>
                     <key>Comment</key>
-                    <string>V1.1.1</string>
+                    <string>V1.1.4</string>
                     <key>Enabled</key>
                     <true/>
                     <key>ExecutablePath</key>
@@ -1067,7 +1060,7 @@
                 <key>HibernateMode</key>
                 <string>None</string>
                 <key>HibernateSkipsPicker</key>
-                <false/>
+                <true/>
                 <key>HideAuxiliary</key>
                 <true/>
                 <key>LauncherOption</key>
@@ -1108,7 +1101,7 @@
                 <key>SysReport</key>
                 <false/>
                 <key>Target</key>
-                <integer>3</integer>
+                <integer>0</integer>
             </dict>
             <key>Entries</key>
             <array>
@@ -1287,25 +1280,25 @@
             <key>Generic</key>
             <dict>
                 <key>AdviseFeatures</key>
-                <true/>
+                <false/>
                 <key>MLB</key>
-                <string>C02011902CDJH4R1F</string>
+                <string>C02914403CDKN2R1F</string>
                 <key>MaxBIOSVersion</key>
                 <false/>
                 <key>ProcessorType</key>
                 <integer>0</integer>
                 <key>ROM</key>
-                <data>3SMqQRDk</data>
+                <data>A93e9q86</data>
                 <key>SpoofVendor</key>
                 <false/>
                 <key>SystemMemoryStatus</key>
                 <string>Upgradable</string>
                 <key>SystemProductName</key>
-                <string>MacBookPro15,2</string>
+                <string>MacBookAir8,1</string>
                 <key>SystemSerialNumber</key>
-                <string>C02CF7YRJHCC</string>
+                <string>C02YJHZ4JK78</string>
                 <key>SystemUUID</key>
-                <string>2463EDAC-A505-48C8-8E32-FF58913EC7A4</string>
+                <string>4373ADD9-C3C5-4313-AB31-7E7BF5FE565F</string>
             </dict>
             <key>UpdateDataHub</key>
             <true/>
@@ -1331,9 +1324,9 @@
                 <key>JumpstartHotPlug</key>
                 <false/>
                 <key>MinDate</key>
-                <integer>0</integer>
+                <integer>-1</integer>
                 <key>MinVersion</key>
-                <integer>0</integer>
+                <integer>-1</integer>
             </dict>
             <key>AppleInput</key>
             <dict>
@@ -1409,7 +1402,7 @@
                     <key>Arguments</key>
                     <string></string>
                     <key>Comment</key>
-                    <string>HFS+ Driver</string>
+                    <string></string>
                     <key>Enabled</key>
                     <true/>
                     <key>LoadEarly</key>
@@ -1481,7 +1474,7 @@
                 <key>PointerSupport</key>
                 <false/>
                 <key>PointerSupportMode</key>
-                <string>ASUS</string>
+                <string></string>
                 <key>TimerResolution</key>
                 <integer>50000</integer>
             </dict>

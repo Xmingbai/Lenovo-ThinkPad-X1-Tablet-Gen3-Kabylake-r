@@ -22,7 +22,7 @@
         <string>1.0</string>
         <key>IOKitPersonalities</key>
         <dict>
-            <key>MacBookPro15,2-XHC</key>
+            <key>MacBookAir8,1-XHC</key>
             <dict>
                 <key>CFBundleIdentifier</key>
                 <string>com.apple.driver.AppleUSBMergeNub</string>
@@ -45,7 +45,7 @@
                         <key>HS01</key>
                         <dict>
                             <key>UsbConnector</key>
-                            <integer>255</integer>
+                            <integer>0</integer>
                             <key>name</key>
                             <string>HS01</string>
                             <key>port</key>
@@ -54,7 +54,7 @@
                         <key>HS02</key>
                         <dict>
                             <key>UsbConnector</key>
-                            <integer>0</integer>
+                            <integer>255</integer>
                             <key>name</key>
                             <string>HS02</string>
                             <key>port</key>
@@ -108,9 +108,9 @@
                     </dict>
                 </dict>
                 <key>model</key>
-                <string>MacBookPro15,2</string>
+                <string>MacBookAir8,1</string>
             </dict>
-            <key>MacBookPro15,2-XHC2</key>
+            <key>MacBookAir8,1-XHC2</key>
             <dict>
                 <key>CFBundleIdentifier</key>
                 <string>com.apple.driver.AppleUSBMergeNub</string>
@@ -151,7 +151,7 @@
                     </dict>
                 </dict>
                 <key>model</key>
-                <string>MacBookPro15,2</string>
+                <string>MacBookAir8,1</string>
             </dict>
         </dict>
         <key>OSBundleRequired</key>
