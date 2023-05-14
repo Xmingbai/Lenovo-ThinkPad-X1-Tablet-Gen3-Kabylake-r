@@ -75,7 +75,7 @@ In Display menu, set the following options:
 
  - Trackpad (USB)
  - Sleep\Wake
-- Microphone 
+ - Microphone 
  
 ## USB Map:
 
