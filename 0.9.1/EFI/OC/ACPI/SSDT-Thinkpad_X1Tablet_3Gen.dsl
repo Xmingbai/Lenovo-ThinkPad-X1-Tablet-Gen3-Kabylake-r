@@ -16,6 +16,7 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
     External (_SB_.PCI0.XHC_, DeviceObj)
     External (_SB_.SLPB._STA, UnknownObj)
     External (_SI_._SST, MethodObj)    // 1 Arguments
+    External (GPE_, DeviceObj)
     External (HPTE, FieldUnitObj)
     External (XPRW, MethodObj)    // 2 Arguments
 
@@ -25,6 +26,18 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
         {
             \_SB.SLPB._STA = 0x0B
             HPTE = Zero
+        }
+
+        Scope (_GPE)
+        {
+            If (_OSI ("Darwin"))
+            {
+                Method (LXEN, 0, NotSerialized)
+                {
+                    Debug = "Method \\_GPE.LXEN Called"
+                    Return (One)
+                }
+            }
         }
 
         Scope (_SB)
@@ -2304,17 +2317,17 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
                                     Zero
                                 })
                             }
+                        }
 
-                            Method (_STA, 0, NotSerialized)  // _STA: Status
+                        Method (_STA, 0, NotSerialized)  // _STA: Status
+                        {
+                            If (_OSI ("Darwin"))
                             {
-                                If (_OSI ("Darwin"))
-                                {
-                                    Return (0x0F)
-                                }
-                                Else
-                                {
-                                    Return (Zero)
-                                }
+                                Return (0x0F)
+                            }
+                            Else
+                            {
+                                Return (Zero)
                             }
                         }
                     }
@@ -2399,35 +2412,53 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
                     }
                 }
             }
-        }
 
-        Method (DTGP, 5, NotSerialized)
-        {
-            If ((Arg0 == ToUUID ("a0b5b7c6-1318-441c-b0c9-fe695eaf949b") /* Unknown UUID */))
+            If (_OSI ("Darwin"))
             {
-                If ((Arg1 == One))
+                Method (LPS0, 0, NotSerialized)
                 {
-                    If ((Arg2 == Zero))
-                    {
-                        Arg4 = Buffer (One)
-                            {
-                                 0x03                                             // .
-                            }
-                        Return (One)
-                    }
-
-                    If ((Arg2 == One))
-                    {
-                        Return (One)
-                    }
+                    Debug = "Method \\_SB._LPS0 Called"
+                    Return (One)
                 }
             }
+        }
 
-            Arg4 = Buffer (One)
+        Name (_S3, Package (0x03)  // _S3_: S3 System State
+        {
+            0x05, 
+            0x05, 
+            Zero
+        })
+        If (_OSI ("Darwin"))
+        {
+            Method (DTGP, 5, NotSerialized)
+            {
+                If ((Arg0 == ToUUID ("a0b5b7c6-1318-441c-b0c9-fe695eaf949b") /* Unknown UUID */))
                 {
-                     0x00                                             // .
+                    If ((Arg1 == One))
+                    {
+                        If ((Arg2 == Zero))
+                        {
+                            Arg4 = Buffer (One)
+                                {
+                                     0x03                                             // .
+                                }
+                            Return (One)
+                        }
+
+                        If ((Arg2 == One))
+                        {
+                            Return (One)
+                        }
+                    }
                 }
-            Return (Zero)
+
+                Arg4 = Buffer (One)
+                    {
+                         0x00                                             // .
+                    }
+                Return (Zero)
+            }
         }
 
         Method (GPRW, 2, NotSerialized)
@@ -2452,7 +2483,6 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
             Name (XLTP, Zero)
             Method (_TTS, 1, NotSerialized)  // _TTS: Transition To State
             {
-                Debug = "Method \\__TTS Called"
                 XLTP = Arg0
             }
         }
