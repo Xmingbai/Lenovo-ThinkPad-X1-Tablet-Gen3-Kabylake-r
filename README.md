@@ -59,7 +59,7 @@ In Display menu, set the following options:
    
 ## Working:
 
- - Keyboard ()
+ - Keyboard (USB)
  - Touchscreen with gestures / Trackstick
  - Battery indicator
  - Audio (Internal)
