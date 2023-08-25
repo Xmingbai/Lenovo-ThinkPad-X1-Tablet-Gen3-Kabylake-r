@@ -1,0 +1,87 @@
+4:639  3:290  Found UEFI Acpi 2.0 RSDP at ab5fe014
+4:639  0:000  Saving ACPI tables from RSDP ab5fe014 to ACPI\origin ...
+4:639  0:000   ab5fe014: 'RSD PTR ', Rev: 2 (Acpi 2.0 or newer), Len: 36 -> RSDP.aml
+4:828  0:189    (Xsdt: ab5a7188, Rsdt: ab5a70c4)
+4:828  0:000    ab5a7188: 'XSDT', 'TP-N1Z', Rev: 1, Len: 276 -> XSDT.aml
+5:014  0:186    ab5a70c4: 'RSDT', 'TP-N1Z', Rev: 1, Len: 156 -> RSDT.aml
+5:198  0:183    Tables in Xsdt: 30
+5:198  0:000    0. ab5e9000: 'FACP', 'TP-N1Z', Rev: 5, Len: 244 -> FACP.aml
+5:388  0:190        (Dsdt: AB5B8000, Facs: AB52C000, XDsdt: ab5b8000, XFacs: 0)
+5:388  0:000        ab5b8000: 'DSDT', 'SKL', Rev: 2, Len: 182625 -> DSDT.aml
+5:619  0:231        ab52c000: 'FACS', Ver: 2, Len: 64 -> FACS.aml
+5:808  0:188    1. ab5ef000: 'SSDT', 'DptfTabl', Rev: 2, Len: 54710 -> SSDT-0-DptfTabl.aml
+6:003  0:194    2. ab541000: 'UEFI', 'TP-N1Z', Rev: 1, Len: 66 -> UEFI.aml
+6:197  0:193    3. ab5eb000: 'SSDT', 'SaSsdt', Rev: 2, Len: 12474 -> SSDT-1-SaSsdt.aml
+6:386  0:189    4. ab5ea000: 'SSDT', 'PerfTune', Rev: 2, Len: 1478 -> SSDT-2-PerfTune.aml
+6:580  0:193    5. ab5e8000: 'HPET', 'TP-N1Z', Rev: 1, Len: 56 -> HPET.aml
+6:768  0:188    6. ab5e7000: 'APIC', 'TP-N1Z', Rev: 3, Len: 300 -> APIC.aml
+6:961  0:192    7. ab5e6000: 'MCFG', 'TP-N1Z', Rev: 1, Len: 60 -> MCFG.aml
+7:146  0:185    8. ab5e5000: 'ECDT', 'TP-N1Z', Rev: 1, Len: 83 -> ECDT.aml
+7:335  0:189    9. ab5b5000: 'SSDT', 'RVP7Rtd3', Rev: 2, Len: 8229 -> SSDT-3-RVP7Rtd3.aml
+7:520  0:184    10. ab5b3000: 'SSDT', 'ProjSsdt', Rev: 2, Len: 5550 -> SSDT-4-ProjSsdt.aml
+7:710  0:189    11. ab5b2000: 'BOOT', 'TP-N1Z', Rev: 1, Len: 40 -> BOOT.aml
+7:895  0:185    12. ab5b1000: 'BATB', 'TP-N1Z', Rev: 2, Len: 74 -> BATB.aml
+8:086  0:190    13. ab5af000: 'SSDT', 'CpuSsdt', Rev: 2, Len: 6062 -> SSDT-5-CpuSsdt.aml (Found hidden SSDT 7 pcs)
+8:273  0:187        * 2874212888: 'SSDT', 'Cpu0Ist', Rev: 2, Len: 1419  53 53 44 54 8B 05 00 00 02 63 50 6D 52 65 66 00 Internal length = 1419 -> SSDT-x5_0-Cpu0Ist.aml
+8:464  0:191        * 2873720856: 'SSDT', 'ApIst', Rev: 2, Len: 3348  53 53 44 54 14 0D 00 00 02 2A 50 6D 52 65 66 00 Internal length = 3348 -> SSDT-x5_1-ApIst.aml
+8:653  0:188        * 2873716760: 'SSDT', 'Cpu0Cst', Rev: 2, Len: 1023  53 53 44 54 FF 03 00 00 02 11 50 6D 52 65 66 00 Internal length = 1023 -> SSDT-x5_2-Cpu0Cst.aml
+8:846  0:192        * 2873717912: 'SSDT', 'ApCst', Rev: 2, Len: 778  53 53 44 54 0A 03 00 00 02 93 50 6D 52 65 66 00 Internal length = 778 -> SSDT-x5_3-ApCst.aml
+9:036  0:189        * 2874214424: 'SSDT', 'Cpu0Hwp', Rev: 2, Len: 186  53 53 44 54 BA 00 00 00 02 7D 50 6D 52 65 66 00 Internal length = 186 -> SSDT-x5_4-Cpu0Hwp.aml
+9:226  0:190        * 2873718808: 'SSDT', 'ApHwp', Rev: 2, Len: 791  53 53 44 54 17 03 00 00 02 80 50 6D 52 65 66 00 Internal length = 791 -> SSDT-x5_5-ApHwp.aml
+9:400  0:173        * 2874214680: 'SSDT', 'HwpLvt', Rev: 2, Len: 1576  53 53 44 54 28 06 00 00 02 85 50 6D 52 65 66 00 Internal length = 1576 -> SSDT-x5_6-HwpLvt.aml
+9:593  0:193  
+9:593  0:000    14. ab5ae000: 'SSDT', 'CtdpB', Rev: 2, Len: 1389 -> SSDT-6-CtdpB.aml
+9:781  0:187    15. ab5ad000: 'SSDT', 'UsbCTabl', Rev: 2, Len: 2826 -> SSDT-7-UsbCTabl.aml
+9:976  0:194    16. ab5ac000: 'LPIT', 'TP-N1Z', Rev: 1, Len: 148 -> LPIT.aml
+10:163  0:187    17. ab5ab000: 'WSMT', 'TP-N1Z', Rev: 1, Len: 40 -> WSMT.aml
+10:355  0:191    18. ab5aa000: 'SSDT', 'HdaDsp', Rev: 2, Len: 321 -> SSDT-8-HdaDsp.aml
+10:542  0:187    19. ab5a9000: 'SSDT', 'sensrhub', Rev: 2, Len: 671 -> SSDT-9-sensrhub.aml
+10:736  0:193    20. ab5a8000: 'SSDT', 'TbtTypeC', Rev: 2, Len: 1348 -> SSDT-10-TbtTypeC.aml
+10:924  0:188    21. ab5fd000: 'DBGP', 'TP-N1Z', Rev: 1, Len: 52 -> DBGP.aml
+11:117  0:192    22. ab5a6000: 'DBG2', 'TP-N1Z', Rev: 0, Len: 97 -> DBG2.aml
+11:305  0:188    23. ab5a5000: 'MSDM', 'TP-N1Z', Rev: 3, Len: 85 -> MSDM.aml
+11:497  0:192    24. ab5a4000: 'DMAR', 'TP-N1Z', Rev: 1, Len: 168 -> DMAR.aml
+11:684  0:186    25. ab5a3000: 'NHLT', 'TP-N1Z', Rev: 0, Len: 45 -> NHLT.aml
+11:874  0:190    26. ab5a2000: 'ASF!', 'TP-N1Z', Rev: 32, Len: 160 -> ASF!.aml
+12:058  0:183    27. ab5a1000: 'FPDT', 'TP-N1Z', Rev: 1, Len: 68 -> FPDT.aml
+12:247  0:189    28. ab5a0000: 'BGRT', 'TP-N1Z', Rev: 1, Len: 56 -> BGRT.aml
+12:431  0:183    29. ab529000: 'UEFI', 'TP-N1Z', Rev: 1, Len: 318 -> UEFI.aml
+12:710  0:278  Found UEFI Acpi 1.0 RSDP at ab5fe000
+12:710  0:000  Printing ACPI tables from RSDP ab5fe000 ...
+12:710  0:000   ab5fe000: 'RSD PTR ', Rev: 0 (Acpi 1.0), Len: 20
+12:710  0:000    (Rsdt: ab5a7000)
+12:710  0:000    ab5a7000: 'RSDT', 'TP-N1Z', Rev: 1, Len: 156
+12:710  0:000    Tables in Rsdt: 30
+12:710  0:000    0. ab5e9000: 'FACP', 'TP-N1Z', Rev: 5, Len: 244
+12:710  0:000        (Dsdt: AB5B8000, Facs: AB52C000, XDsdt: ab5b8000, XFacs: 0)
+12:710  0:000        ab5b8000: 'DSDT', 'SKL', Rev: 2, Len: 182625
+12:714  0:004        ab52c000: 'FACS', Ver: 2, Len: 64
+12:714  0:000    1. ab5ef000: 'SSDT', 'DptfTabl', Rev: 2, Len: 54710
+12:714  0:000    2. ab541000: 'UEFI', 'TP-N1Z', Rev: 1, Len: 66
+12:714  0:000    3. ab5eb000: 'SSDT', 'SaSsdt', Rev: 2, Len: 12474
+12:714  0:000    4. ab5ea000: 'SSDT', 'PerfTune', Rev: 2, Len: 1478
+12:714  0:000    5. ab5e8000: 'HPET', 'TP-N1Z', Rev: 1, Len: 56
+12:714  0:000    6. ab5e7000: 'APIC', 'TP-N1Z', Rev: 3, Len: 300
+12:714  0:000    7. ab5e6000: 'MCFG', 'TP-N1Z', Rev: 1, Len: 60
+12:714  0:000    8. ab5e5000: 'ECDT', 'TP-N1Z', Rev: 1, Len: 83
+12:714  0:000    9. ab5b5000: 'SSDT', 'RVP7Rtd3', Rev: 2, Len: 8229
+12:714  0:000    10. ab5b3000: 'SSDT', 'ProjSsdt', Rev: 2, Len: 5550
+12:714  0:000    11. ab5b2000: 'BOOT', 'TP-N1Z', Rev: 1, Len: 40
+12:714  0:000    12. ab5b1000: 'BATB', 'TP-N1Z', Rev: 2, Len: 74
+12:714  0:000    13. ab5af000: 'SSDT', 'CpuSsdt', Rev: 2, Len: 6062
+12:714  0:000    14. ab5ae000: 'SSDT', 'CtdpB', Rev: 2, Len: 1389
+12:714  0:000    15. ab5ad000: 'SSDT', 'UsbCTabl', Rev: 2, Len: 2826
+12:714  0:000    16. ab5ac000: 'LPIT', 'TP-N1Z', Rev: 1, Len: 148
+12:714  0:000    17. ab5ab000: 'WSMT', 'TP-N1Z', Rev: 1, Len: 40
+12:714  0:000    18. ab5aa000: 'SSDT', 'HdaDsp', Rev: 2, Len: 321
+12:714  0:000    19. ab5a9000: 'SSDT', 'sensrhub', Rev: 2, Len: 671
+12:714  0:000    20. ab5a8000: 'SSDT', 'TbtTypeC', Rev: 2, Len: 1348
+12:714  0:000    21. ab5fd000: 'DBGP', 'TP-N1Z', Rev: 1, Len: 52
+12:714  0:000    22. ab5a6000: 'DBG2', 'TP-N1Z', Rev: 0, Len: 97
+12:714  0:000    23. ab5a5000: 'MSDM', 'TP-N1Z', Rev: 3, Len: 85
+12:714  0:000    24. ab5a4000: 'DMAR', 'TP-N1Z', Rev: 1, Len: 168
+12:714  0:000    25. ab5a3000: 'NHLT', 'TP-N1Z', Rev: 0, Len: 45
+12:714  0:000    26. ab5a2000: 'ASF!', 'TP-N1Z', Rev: 32, Len: 160
+12:714  0:000    27. ab5a1000: 'FPDT', 'TP-N1Z', Rev: 1, Len: 68
+12:714  0:000    28. ab5a0000: 'BGRT', 'TP-N1Z', Rev: 1, Len: 56
+12:714  0:000    29. ab529000: 'UEFI', 'TP-N1Z', Rev: 1, Len: 318
