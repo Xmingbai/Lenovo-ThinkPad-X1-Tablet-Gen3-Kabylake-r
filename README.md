@@ -70,11 +70,11 @@ In Display menu, set the following options:
  - MicroSD card reader
  - HDMI video and audio 
  - Thunderbolt JHL6540 Alpine Ridge Work whit HotPlug 
- 
+ - Sleep\Wake Fix 30\8\2023
+
 ## Not Work:
 
  - Trackpad (USB)
- - Sleep\Wake
  - Microphone 
  
 ## USB Map:
@@ -917,7 +917,7 @@ In Display menu, set the following options:
     }
 }
 ```
-## YogaSMC Panel Partial functions "the keyboard is USB and the DSDT Bios has a compilation BUG. Only with DSDT Hack it is possible to activate DYTCSupport"
+## YogaSMC Panel Partial functions "keyboard USB"
 
 ![Lenovo](./Screenshot/7.png)
 
