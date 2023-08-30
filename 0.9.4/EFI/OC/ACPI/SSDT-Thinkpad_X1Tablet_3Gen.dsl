@@ -1,31 +1,14 @@
 /*
- * Intel ACPI Component Architecture
- * AML/ASL+ Disassembler version 20200925 (64-bit version)
- * Copyright (c) 2000 - 2020 Intel Corporation
- * 
- * Disassembling to symbolic ASL+ operators
- *
- * Disassembly of iASLrPbud1.aml, Fri Jul 28 16:32:28 2023
- *
- * Original Table Header:
- *     Signature        "SSDT"
- *     Length           0x00002383 (9091)
- *     Revision         0x02
- *     Checksum         0xD6
- *     OEM ID           "Hack"
- *     OEM Table ID     "X1Tablet"
- *     OEM Revision     0x00000000 (0)
- *     Compiler ID      "INTL"
- *     Compiler Version 0x20200925 (538970405)
- */
-DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
+*/
+DefinitionBlock ("", "SSDT", 2, "APPLE", "X1Tablet", 0x00000000)
 {
     External (_SB_.MEM_._STA, UnknownObj)
     External (_SB_.PCI0, DeviceObj)
     External (_SB_.PCI0.GFX0, DeviceObj)
+    External (_SB_.PCI0.GLAN, DeviceObj)
+    External (_SB_.PCI0.GLAN._STA, IntObj)
     External (_SB_.PCI0.I2C1, DeviceObj)
     External (_SB_.PCI0.I2C1.TPL0, DeviceObj)
-    External (_SB_.PCI0.I2C1.TPL0._STA, IntObj)
     External (_SB_.PCI0.LPCB, DeviceObj)
     External (_SB_.PCI0.LPCB.ARTC, DeviceObj)
     External (_SB_.PCI0.LPCB.EC__, DeviceObj)
@@ -34,31 +17,27 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
     External (_SB_.PCI0.RP09, DeviceObj)
     External (_SB_.PCI0.RP09.PXSX, DeviceObj)
     External (_SB_.PCI0.SBUS, DeviceObj)
-    External (_SB_.PCI0.XHC_, DeviceObj)
     External (_SB_.SLPB._STA, UnknownObj)
     External (_SI_._SST, MethodObj)    // 1 Arguments
-    External (GPE_, DeviceObj)
     External (HPTE, FieldUnitObj)
-    External (XPRW, MethodObj)    // 2 Arguments
+    External (LNUX, IntObj)
+    External (WNTF, IntObj)
 
     Scope (\)
     {
         If (_OSI ("Darwin"))
         {
             \_SB.SLPB._STA = 0x0B
-            HPTE = Zero
-        }
-
-        Scope (_GPE)
-        {
-            If (_OSI ("Darwin"))
+            \LNUX = One
+            \WNTF = One
+            HPTE = Zero            
+            Name (\_S3, Package (0x04)  // _S3_: S3 System State
             {
-                Method (LXEN, 0, NotSerialized)
-                {
-                    Debug = "Method \\_GPE.LXEN Called"
-                    Return (One)
-                }
-            }
+                0x05, 
+                0x05, 
+                Zero, 
+                Zero
+            })
         }
 
         Scope (_SB)
@@ -112,6 +91,14 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
                         {
                             Return (Zero)
                         }
+                    }
+                }
+
+                Scope (GLAN)
+                {
+                    If (_OSI ("Darwin"))
+                    {
+                        Name (_STA, Zero)  // _STA: Status
                     }
                 }
 
@@ -2429,17 +2416,6 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
                         }
                     }
                 }
-
-                Scope (XHC)
-                {
-                    If (_OSI ("Darwin"))
-                    {
-                        Method (_PRW, 0, NotSerialized)  // _PRW: Power Resources for Wake
-                        {
-                            Return (GPRW (0x6D, Zero))
-                        }
-                    }
-                }
             }
 
             Device (USBX)
@@ -2476,87 +2452,35 @@ DefinitionBlock ("", "SSDT", 2, "Hack", "X1Tablet", 0x00000000)
                     }
                 }
             }
-
-            If (_OSI ("Darwin"))
-            {
-                Method (LPS0, 0, NotSerialized)
-                {
-                    Debug = "Method \\_SB._LPS0 Called"
-                    Return (One)
-                }
-            }
         }
 
-        Name (_S3, Package (0x03)  // _S3_: S3 System State
+        Method (DTGP, 5, NotSerialized)
         {
-            0x05, 
-            0x05, 
-            Zero
-        })
-        If (_OSI ("Darwin"))
-        {
-            Method (DTGP, 5, NotSerialized)
+            If ((Arg0 == ToUUID ("a0b5b7c6-1318-441c-b0c9-fe695eaf949b") /* Unknown UUID */))
             {
-                If ((Arg0 == ToUUID ("a0b5b7c6-1318-441c-b0c9-fe695eaf949b") /* Unknown UUID */))
+                If ((Arg1 == One))
                 {
-                    If ((Arg1 == One))
+                    If ((Arg2 == Zero))
                     {
-                        If ((Arg2 == Zero))
-                        {
-                            Arg4 = Buffer (One)
-                                {
-                                     0x03                                             // .
-                                }
-                            Return (One)
-                        }
+                        Arg4 = Buffer (One)
+                            {
+                                 0x03                                             // .
+                            }
+                        Return (One)
+                    }
 
-                        If ((Arg2 == One))
-                        {
-                            Return (One)
-                        }
+                    If ((Arg2 == One))
+                    {
+                        Return (One)
                     }
                 }
-
-                Arg4 = Buffer (One)
-                    {
-                         0x00                                             // .
-                    }
-                Return (Zero)
             }
-        }
 
-        Method (GPRW, 2, NotSerialized)
-        {
-            If (_OSI ("Darwin"))
-            {
-                If ((0x6D == Arg0))
+            Arg4 = Buffer (One)
                 {
-                    Return (Package (0x02)
-                    {
-                        0x6D, 
-                        Zero
-                    })
+                     0x00                                             // .
                 }
-            }
-
-            Return (XPRW (Arg0, Arg1))
-        }
-
-        If (_OSI ("Darwin"))
-        {
-            Method (MDBG, 1, NotSerialized)
-            {
-                Debug = Arg0
-            }
-        }
-
-        If (_OSI ("Darwin"))
-        {
-            Name (XLTP, Zero)
-            Method (_TTS, 1, NotSerialized)  // _TTS: Transition To State
-            {
-                XLTP = Arg0
-            }
+            Return (Zero)
         }
     }
 }
