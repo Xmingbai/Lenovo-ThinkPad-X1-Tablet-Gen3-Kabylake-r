@@ -1,5 +1,3 @@
-/*
-*/
 DefinitionBlock ("", "SSDT", 2, "APPLE", "X1Tablet", 0x00000000)
 {
     External (_SB_.MEM_._STA, UnknownObj)
@@ -17,20 +15,29 @@ DefinitionBlock ("", "SSDT", 2, "APPLE", "X1Tablet", 0x00000000)
     External (_SB_.PCI0.RP09, DeviceObj)
     External (_SB_.PCI0.RP09.PXSX, DeviceObj)
     External (_SB_.PCI0.SBUS, DeviceObj)
+    External (_SB_.PCI0.XDCI, DeviceObj)
+    External (_SB_.PCI0.XDCI._STA, IntObj)
     External (_SB_.SLPB._STA, UnknownObj)
+    External (_SB_.UBTC._STA, UnknownObj)
     External (_SI_._SST, MethodObj)    // 1 Arguments
     External (HPTE, FieldUnitObj)
     External (LNUX, IntObj)
+    External (SDS0, UnknownObj)
+    External (USBH, UnknownObj)
     External (WNTF, IntObj)
+    External (ZPRW, MethodObj)    // 2 Arguments
 
     Scope (\)
     {
         If (_OSI ("Darwin"))
         {
             \_SB.SLPB._STA = 0x0B
+            \_SB.PCI0.XDCI._STA = Zero
             \LNUX = One
             \WNTF = One
-            HPTE = Zero            
+            HPTE = Zero
+            SDS0 = One
+            USBH = One
             Name (\_S3, Package (0x04)  // _S3_: S3 System State
             {
                 0x05, 
@@ -94,14 +101,6 @@ DefinitionBlock ("", "SSDT", 2, "APPLE", "X1Tablet", 0x00000000)
                     }
                 }
 
-                Scope (GLAN)
-                {
-                    If (_OSI ("Darwin"))
-                    {
-                        Name (_STA, Zero)  // _STA: Status
-                    }
-                }
-
                 Scope (GFX0)
                 {
                     Device (PNLF)
@@ -120,6 +119,14 @@ DefinitionBlock ("", "SSDT", 2, "APPLE", "X1Tablet", 0x00000000)
                                 Return (Zero)
                             }
                         }
+                    }
+                }
+
+                Scope (GLAN)
+                {
+                    If (_OSI ("Darwin"))
+                    {
+                        Name (_STA, Zero)  // _STA: Status
                     }
                 }
 
@@ -229,15 +236,6 @@ DefinitionBlock ("", "SSDT", 2, "APPLE", "X1Tablet", 0x00000000)
 
                         Method (RE1B, 1, NotSerialized)
                         {
-                            If (_OSI ("Darwin"))
-                            {
-                                Name (_PRW, Package (0x02)  // _PRW: Power Resources for Wake
-                                {
-                                    0x17, 
-                                    0x03
-                                })
-                            }
-
                             If (_OSI ("Darwin"))
                             {
                                 OperationRegion (ERAM, EmbeddedControl, Arg0, One)
@@ -2357,13 +2355,13 @@ DefinitionBlock ("", "SSDT", 2, "APPLE", "X1Tablet", 0x00000000)
                                     "address", 
                                     Zero, 
                                     "version", 
-                                    0x03, 
+                                    0x02, 
                                     "fault-off", 
                                     0x03, 
                                     "fault-len", 
                                     0x04, 
                                     "type", 
-                                    0x49324300, 
+                                    Zero, 
                                     "command", 
                                     Zero
                                 })
@@ -2481,6 +2479,23 @@ DefinitionBlock ("", "SSDT", 2, "APPLE", "X1Tablet", 0x00000000)
                      0x00                                             // .
                 }
             Return (Zero)
+        }
+
+        Method (GPRW, 2, NotSerialized)
+        {
+            If (_OSI ("Darwin"))
+            {
+                If ((0x6D == Arg0))
+                {
+                    Return (Package (0x02)
+                    {
+                        0x6D, 
+                        Zero
+                    })
+                }
+            }
+
+            Return (ZPRW (Arg0, Arg1))
         }
     }
 }
