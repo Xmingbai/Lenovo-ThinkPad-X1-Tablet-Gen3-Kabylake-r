@@ -71,7 +71,7 @@ In Display menu, set the following options:
  - HDMI video and audio 
  - Thunderbolt JHL6540 Alpine Ridge Work whit HotPlug 
  - Sleep\Wake Fix 30\8\2023
- - Trackpad (USB)
+ - Trackpad (USB) 9\9\2023
  
  - ## Not Work:
 
