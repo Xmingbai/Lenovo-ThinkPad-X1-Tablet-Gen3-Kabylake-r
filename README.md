@@ -60,7 +60,7 @@ In Display menu, set the following options:
 ## Working:
 
  - Keyboard (USB)
- - Touchscreen with gestures and Pen
+ - Touchscreen with gestures and Pen (Fix 10\9\2023)
  - Battery indicator
  - Audio (Internal)
  - GPU acceleration
