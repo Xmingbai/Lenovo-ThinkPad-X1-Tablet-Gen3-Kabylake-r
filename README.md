@@ -70,9 +70,9 @@ In Display menu, set the following options:
  - MicroSD card reader
  - HDMI video and audio 
  - Thunderbolt JHL6540 Alpine Ridge Work whit HotPlug 
- - Sleep\Wake Fix 30\8\2023
- - Trackpad (USB) 9\9\2023
- 
+ - Sleep\Wake Fix 30\8\2023 Thank [Vorshim92](github.com/Vorshim92) 
+ - Trackpad (USB) 9\9\2023 Thank [Lorys89](https://github.com/Lorys89)
+ -  
  - ## Not Work:
 
  - Microphone 
