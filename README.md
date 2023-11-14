@@ -38,11 +38,6 @@ In Security menu, set the following settings:
 -  `Intel SGX -> Intel SGX Control`: must be **Disabled**
 -  `Device Guard`: must be **Disabled**
 
-In Startup menu, set the following options:
-
--  `UEFI/Legacy Boot`: **UEFI Only**
--  `CSM Support`: **No**
-
 In Thunderbolt menu, set the following options:
 
 -  `Thunderbolt BIOS Assist Mode`: **UEFI Only**
