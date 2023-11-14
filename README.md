@@ -67,10 +67,11 @@ In Display menu, set the following options:
  - Thunderbolt JHL6540 Alpine Ridge Work whit HotPlug 
  - Sleep\Wake Fix 30\8\2023 Thank [Vorshim92](https://github.com/Vorshim92)
  - Trackpad (USB) 9\9\2023 Thank [Lorys89](https://github.com/Lorys89)
- - Microphone
   
 ## Not Work:
- 
+
+ - Internal Microphone
+
 ## USB Map:
 
 ![Lenovo](./Screenshot/3.png)
