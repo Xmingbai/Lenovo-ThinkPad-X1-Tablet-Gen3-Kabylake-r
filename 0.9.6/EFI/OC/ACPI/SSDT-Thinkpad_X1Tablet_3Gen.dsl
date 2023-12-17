@@ -1,7 +1,6 @@
 DefinitionBlock ("", "SSDT", 2, "APPLE", "X1Tablet", 0x00000000)
 {
     External (_PR_.PR00, ProcessorObj)
-    External (_SB_.MEM_._STA, UnknownObj)
     External (_SB_.PCI0, DeviceObj)
     External (_SB_.PCI0.GFX0, DeviceObj)
     External (_SB_.PCI0.GLAN, DeviceObj)
@@ -162,14 +161,6 @@ DefinitionBlock ("", "SSDT", 2, "APPLE", "X1Tablet", 0x00000000)
                                 0x62
                             })
                             Return (PKG) /* \_SB_.PCI0.I2C1.FMCN.PKG_ */
-                        }
-                    }
-
-                    Scope (TPL0)
-                    {
-                        If (_OSI ("Darwin"))
-                        {
-                            Name (OSYS, 0x07DC)
                         }
                     }
                 }
@@ -640,6 +631,22 @@ DefinitionBlock ("", "SSDT", 2, "APPLE", "X1Tablet", 0x00000000)
             }
 
             Return (ZPRW (Arg0, Arg1))
+        }
+
+        Method (XOSI, 1, NotSerialized)
+        {
+            Local0 = Package (0x15)
+                {
+                    "Windows 2015"
+                }
+            If (_OSI ("Darwin"))
+            {
+                Return ((Ones != Match (Local0, MEQ, Arg0, MTR, Zero, Zero)))
+            }
+            Else
+            {
+                Return (_OSI (Arg0))
+            }
         }
     }
 }
