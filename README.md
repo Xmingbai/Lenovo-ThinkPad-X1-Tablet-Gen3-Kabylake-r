@@ -121,7 +121,7 @@ In Display menu, set the following options:
                 </dict>
 ```
 
-## YogaSMC Panel Partial functions "keyboard USB"
+## YogaSMC Panel 2.0 Partial functions "keyboard USB"
 
 ![Lenovo](./Screenshot/7.png)
 
